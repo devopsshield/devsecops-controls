@@ -1,0 +1,66 @@
+﻿{
+  "name": "Branch Policies - Automatically include code reviewers",
+  "code": "ADO_Project_Repository_BranchPolicy_Automatically_Include_Code_Reviewers",
+  "description": "Enable the 'Automatically included reviewers' branch policy, so that you can automatically add reviewers to pull requests that change files in specific directories and files, or to all pull requests in a repo. This policy will ensure that required reviewers are added for modified files matching specified patterns. Designate code reviewers to automatically include when pull requests change certain areas of code. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#automatically-include-code-reviewers https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Branch Policies' section, click on a branch from the list. \n6. With the branch selected, under 'Automatically included reviewers' section, click on '+' button to add a new reviewer policy. \n7. Ensure at least one policy is enabled.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3020",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Required reviewers
+          - This policy will ensure that required reviewers are added for modified files matching specified patterns.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Required reviewers"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryBranchScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.RequiredReviewerIds.Count",
+          "operator": "greaterThan",
+          "value": 0
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.CreatorVoteCounts",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

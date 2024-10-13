@@ -1,0 +1,23 @@
+﻿{
+  "name": "ADO Secure Organization Pipelines",
+  "code": "ADO_Organization_Pipeline_Settings_BestPractices",
+  "description": "Secure organization pipelines by managing the general pipeline settings and agent pools.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Organization_Pipeline_Settings_Limit_Non_Release_Pipeline_Scope",
+    "ADO_Organization_Pipeline_Settings_Limit_Pipeline_Scope_To_Referenced_Repos",
+    "ADO_Organization_Pipeline_Settings_Limit_Release_Pipeline_Scope",
+    "ADO_Organization_Pipeline_Settings_Limit_Settable_Variables_At_Queue_Time",
+    "ADO_Organization_Pipeline_Settings_Disable_Anonymous_Access_To_Badges",
+    "ADO_Organization_Pipeline_Settings_Disable_Stage_Chooser",
+    "ADO_Organization_Pipeline_Settings_Disable_Creation_Of_Classic_Build_Pipelines",
+    "ADO_Organization_Pipeline_Settings_Disable_Creation_Of_Classic_Release_Pipelines",
+    "ADO_Organization_Pipeline_Settings_Disable_Implied_YAML_CI_Trigger",
+    "ADO_Organization_Pipeline_AgentPool_Dont_Enable_AutoProvisioning",
+    "ADO_Organization_Pipeline_AgentPool_Enable_Auto_Update",
+    "ADO_Organization_Pipeline_Settings_Enable_Shell_Tasks_Arguments_Validation",
+    "ADO_Organization_Pipeline_Settings_Disable_Building_Pull_Requests_From_Forked_Repositories"
+  ]
+}

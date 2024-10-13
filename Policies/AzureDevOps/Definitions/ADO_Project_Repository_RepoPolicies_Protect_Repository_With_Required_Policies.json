@@ -1,0 +1,63 @@
+﻿{
+  "name": "Repository Policies - Protect repository with required policies",
+  "code": "ADO_Project_Repository_RepoPolicies_Protect_Repository_With_Required_Policies",
+  "description": "Enable required repository policies, so that you enfore default settings and options. This policy will ensure that best practice policies are required on each repository: Commit author email validation, Reserved names, Maximum path length, Maximum file size, and Git repository settings. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#repository-policies-or-options https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Repository Policies' section, ensure the required policies are turned on.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3090",
+  "policyRule": {
+    "target": "ADOProjectGitRepository",
+    "if": {
+      "allOf": [
+        /*
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "HasRepositoryRequiredPolicies",
+          "operator": "equals",
+          "value": true
+        },
+        */
+        // Commit author email validation
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "CommitAuthorEmailValidationPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        },
+        // Reserved names
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "ReservedNamesRestrictionPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        },
+        // Maximum path length
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "PathLengthRestrictionPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        },
+        // Maximum file size
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "FileSizeRestrictionPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        },
+        // Git repository settings
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "GitRepositorySettingsPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

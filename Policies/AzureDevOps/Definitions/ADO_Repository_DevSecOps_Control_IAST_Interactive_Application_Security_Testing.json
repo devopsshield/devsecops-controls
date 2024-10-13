@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Interactive Application Security Testing (IAST)",
+  "code": "ADO_Repository_DevSecOps_Control_IAST_Interactive_Application_Security_Testing",
+  "description": "Make sure that Interactive Application Security Testing (IAST) is in place for your repository. During quality assurance testing or when an application is being used, interactive application security tools scan the code to find vulnerabilities and provide reports that identify where in the code the issue is. IAST tools are typically geared to analyze Web Applications and Web APIs, but that is vendor specific. There may be IAST products that can perform good security analysis on non-web applications as well. IAST works best when deployed in a QA environment with automated functional tests running. Learn more: https://owasp.org/www-community/Free_for_Open_Source_Application_Security_Tools https://appsecmap.com https://snyk.io/learn/application-security/iast-interactive-application-security-testing/ https://www.veracode.com/security/interactive-application-security-testing-iast https://owasp.org/www-project-devsecops-guideline/latest/02c-Interactive-Application-Security-Testing",
+  "recommendation": "1. Navigate to Project -> Pipelines. \n2. Open your repository CD Pipeline. \n3. Ensure a IAST scanning tool is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "high",
+  "ruleId": "DOS3580",
+  "policyRule": {
+    "target": "ADORepositoryPipelines",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADORepositoryPipelines",
+          "property": "PipelinesFinalYaml",
+          "operator": "match",
+          "value": "$(ADO_POLICY_VAR_DEVSECOPS_IAST_INTERACTIVE_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

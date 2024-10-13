@@ -1,0 +1,26 @@
+﻿{
+  "name": "Branch Protection Rules - Protect your most important branches",
+  "code": "GH_Repository_BranchProtectionRules_Protect_Your_Most_Important_Branches",
+  "description": "Protect your most important branches by setting branch protection rules. You can enforce certain workflows or requirements before a collaborator can push changes to a branch in your repository, including merging a pull request into the branch, by creating a branch protection rule. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule",
+  "recommendation": "1. Go to your Repository Settings. \n2. In the 'Code and automation' section of the sidebar, select 'Branches' section. \n3. Click on 'Add branch protection rule' button. \n4. Follow the steps to protect your most important branches.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "critical",
+  "ruleId": "DOS5600",
+  "policyRule": {
+    "target": "GHBranchProtectionRules",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHBranchProtectionRules",
+          "property": "BranchProtectionRules.TotalCount",
+          "operator": "greaterThan",
+          "value": 0
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

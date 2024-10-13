@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipelines - Environment should have a description",
+  "code": "ADO_Project_Pipelines_Library_Environment_Should_Have_Description",
+  "description": "Make sure to add a description to your pipeline environment. Include a description in your pipeline environment for clarity and purpose. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Environments \n2. Select an environment. \n3. Click on the three dots button (top right). \n4. Click Edit. \n5. Enter a Description. \n6. Click on 'Save'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2325",
+  "policyRule": {
+    "target": "ADOProjectEnvironmentInstance",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectEnvironmentInstance",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

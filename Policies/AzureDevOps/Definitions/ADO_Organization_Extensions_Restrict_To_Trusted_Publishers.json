@@ -1,0 +1,48 @@
+﻿{
+  "name": "Extensions - Restrict extensions to only trusted publishers",
+  "code": "ADO_Organization_Extensions_Restrict_To_Trusted_Publishers",
+  "description": "Allow extensions only from trusted publishers to be installed in your organization. Running extensions from untrusted source can lead to all type of attacks and data loss. Learn more: https://learn.microsoft.com/en-us/azure/devops/extend/overview",
+  "recommendation": "1. Go to Organization Settings. \n2. Select Extensions. \n3. Review all installed extensions in the organization.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1020",
+  "policyRule": {
+    "target": "ADOOrganizationExtension",
+    "if": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "resource": "ADOOrganizationExtension",
+              "property": "ExtensionName",
+              "operator": "match",
+              "value": "$(POLICY_VAR_ORGANIZATION_EXTENSIONS_TRUSTED_PUBLISHER_PATTERNS)"
+            },
+            {
+              "resource": "ADOOrganizationExtension",
+              "property": "PublisherName",
+              "operator": "match",
+              "value": "$(POLICY_VAR_ORGANIZATION_EXTENSIONS_TRUSTED_PUBLISHER_PATTERNS)"
+            },
+            {
+              "resource": "ADOOrganizationExtension",
+              "property": "PublisherId",
+              "operator": "match",
+              "value": "$(POLICY_VAR_ORGANIZATION_EXTENSIONS_TRUSTED_PUBLISHER_PATTERNS)"
+            },
+            {
+              "resource": "ADOOrganizationExtension",
+              "property": "Flags",
+              "operator": "contains",
+              "value": "trusted"
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

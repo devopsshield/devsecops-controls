@@ -1,0 +1,32 @@
+﻿{
+  "name": "Disallow Guest Users",
+  "code": "ADO_Organization_Policies_User_Disable_Guest_Users",
+  "description": "External guest access should be disabled. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#external-guest-access https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-external-user",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. User policies. \n4. Turn 'Off' the setting 'External guest access'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1220",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.DisallowAadGuestUserAccess"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

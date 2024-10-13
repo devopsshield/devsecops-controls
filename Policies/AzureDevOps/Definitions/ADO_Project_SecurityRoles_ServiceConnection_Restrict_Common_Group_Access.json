@@ -1,0 +1,44 @@
+﻿{
+  "name": "Security Roles - Restrict global group access permissions on service connection",
+  "code": "ADO_Project_SecurityRoles_ServiceConnection_Restrict_Common_Group_Access",
+  "description": "The global groups (Administrators, Service Accounts, Contributors, Creators, Readers, Valid Users) should not have elavated permissions (Admin/User). User permissions for certain groups must be restricted to read-only access. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scoped-permissions  https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions-lookup-guide https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources?#user-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions#set-service-connection-permissions",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on the three dots button. \n5. Click Security. \n6. Under 'User permissions' section, review security roles and ensure common groups have only read-only access.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2400",
+  "policyRule": {
+    "target": "ADOSecurityRoleAssignment",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ResourceType",
+          "operator": "equals",
+          "value": "Endpoint"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ScopeId",
+          "operator": "equals",
+          "value": "distributedtask.serviceendpointrole"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Identity.DisplayName",
+          "operator": "contains",
+          "value": "$(POLICY_VAR_PROJECT_SECURITY_ROLES_GLOBAL_GROUPS)"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Role.Name",
+          "operator": "equals",
+          "value": "Reader"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿{
+  "name": "Ensure project visibility is set to Private",
+  "code": "ADO_Project_Private_Visibility",
+  "description": "Ensure project visibility is always private. Private projects require users to be granted access to the project and signed in to access the services. Learn more: https://docs.microsoft.com/en-us/azure/devops/organizations/public/make-project-public",
+  "recommendation": "1. Go to Project Overview -> Summary. \n2. On top right, make sure the project is labeled 'Private'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "critical",
+  "ruleId": "DOS2330",
+  "policyRule": {
+    "target": "ADOTeamProjectReference",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOTeamProjectReference",
+          "property": "Visibility",
+          "operator": "equals",
+          "value": "private"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

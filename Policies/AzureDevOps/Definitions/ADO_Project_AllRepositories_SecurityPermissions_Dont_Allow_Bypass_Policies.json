@@ -1,0 +1,43 @@
+﻿{
+  "name": "All Repositories - Security Permissions - Do not allow bypassing policies",
+  "code": "ADO_Project_AllRepositories_SecurityPermissions_Dont_Allow_Bypass_Policies",
+  "description": "Protect important branches across all repositories in this project. This policy will ensure that no user has permissions to bypass policies. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#secure-azure-repos https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-permissions",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Under 'All Repositories' page, click on Security tab. \n4. On the page 'User permissions', ensure the 'Bypass policies when completing pull requests' and 'Bypass policies when pushing' user permisions are 'Not set' or 'Deny'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "critical",
+  "ruleId": "DOS2120",
+  "policyRule": {
+    "target": "ADOSecurityPermissions",
+    "if": {
+      "allOf": [
+        /* 
+          Bypass policies when completing pull requests 
+          Bypass policies when pushing
+          Token: repoV2/PROJECT_ID
+        */
+        {
+          "resource": "ADOSecurityPermissions",
+          "property": "SecurityNamespace",
+          "operator": "equals",
+          "value": "GitRepositories"
+        },
+        {
+          "resource": "ADOSecurityPermissions",
+          "property": "Token",
+          "operator": "match",
+          "value": "^repoV2\/[^\/]*$"
+        },
+        {
+          "resource": "ADOSecurityPermissions",
+          "property": "Permissions",
+          "operator": "notContains",
+          "value": "PullRequestBypassPolicy,PolicyExempt"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+﻿{
+  "name": "Repository Policies - Disable Forks",
+  "code": "ADO_Project_Repository_RepoPolicy_Disable_Forks",
+  "description": "Disable the 'Forks' repository policy setting, so that you block users to create forks from this repository. The more forks there are, the harder it is to keep track of each fork’s security. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#enable-forks",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Settings tab. \n5. Under 'Repository Settings' section, turn 'Off' the setting 'Forks'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3120",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Git repository settings
+          - Disable repository forking
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Git repository settings"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.AllowedForkTargets",
+          "operator": "equals",
+          "value": 0
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Organization Pipelines",
+  "description": "Secure organization pipelines by managing the general pipeline settings and agent pools.",
+  "policyInitiativeCode": "ADO_Organization_Pipeline_Settings_BestPractices"
+}

@@ -1,0 +1,33 @@
+﻿{
+  "name": "Disallow Anonymous Access",
+  "code": "ADO_Organization_Policies_Security_Dont_Allow_Public_Projects",
+  "description": "Allow public projects should be disabled. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/projects/create-project https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#project-level-permissions",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. Security policies. \n4. Turn 'Off' the setting 'Allow public projects'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1180",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.AllowAnonymousAccess"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+

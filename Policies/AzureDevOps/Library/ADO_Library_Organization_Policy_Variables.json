@@ -1,0 +1,8 @@
+﻿[
+  {
+    "name": "POLICY_VAR_ORGANIZATION_EXTENSIONS_TRUSTED_PUBLISHER_PATTERNS",
+    "value": "(Microsoft|Microsoft DevLabs|DevOpsShield)",
+    "description": "Only install extensions from trusted publishers. ADOOrganizationExtension - PublisherName, PublisherId or ExtensionName properties.",
+    "type": "policyVariable"
+  } 
+]

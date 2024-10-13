@@ -1,0 +1,18 @@
+﻿{
+  "name": "GitHub Secure Organizations - General",
+  "code": "GH_Organization_BestPractices",
+  "description": "Secure your organization by applying standards and best practices.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GH_Organization_Policies_NoPermission_Repository_Base_Permissions",
+    "GH_Organization_Policies_Restrict_Repository_Creation_Public",
+    "GH_Organization_Policies_Restrict_Repository_Creation_To_Internal",
+    "GH_Organization_Policies_Restrict_Repository_Creation_To_Private",
+    "GH_Organization_Policies_Disable_Repository_Forking",
+    "GH_Organization_Policies_Restrict_GitHub_Pages_Creation",
+    "GH_Organization_Should_Have_Profile",
+    "GH_Organization_Authentication_Security_Require_2FA"
+  ]
+}

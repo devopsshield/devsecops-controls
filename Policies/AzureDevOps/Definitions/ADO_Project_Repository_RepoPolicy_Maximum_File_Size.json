@@ -1,0 +1,54 @@
+﻿{
+  "name": "Repository Policies - Maximum file size (10 MB)",
+  "code": "ADO_Project_Repository_RepoPolicy_Maximum_File_Size",
+  "description": "Enable the 'Maximum file size' repository policy setting, so that you block files over a certain size from entering the repository. This policy will reject pushes to a repository for files which exceed the specified size. Block pushes that contain new or updated files larger than this limit. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#maximum-file-size-policy https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Repository Policies' section, turn 'On' the policy 'Maximum file size' and select the (10 MB) value from the drop down list.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS3130",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          File size restriction
+          - This policy will reject pushes to a repository for files which exceed the specified size.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "File size restriction"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MaximumGitBlobSizeInBytes",
+          "operator": "lessThan",
+          "value": 10485761 /* 10MB = 10485760 */ /* 5MB = 5242880 */
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

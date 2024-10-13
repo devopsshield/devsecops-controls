@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects - Security Roles",
+  "description": "Secure your projects by restricting user permissions and assigned roles.",
+  "policyInitiativeCode": "ADO_Project_SecurityRoles_BestPractices"
+}

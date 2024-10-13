@@ -1,0 +1,50 @@
+﻿{
+  "name": "Organization should always have a complete profile",
+  "code": "GH_Organization_Should_Have_Profile",
+  "description": "Make sure to complete the profile for your organization. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/creating-and-managing-repositories/creating-a-new-repository",
+  "recommendation": "1. Go to Organization Settings. \n2. Select the 'General' section of the sidebar. \n3. Ensure the profile is complete by filling in the fields: Name, Description, Url, Location and Picture.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "low",
+  "ruleId": "DOS4510",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "Name",
+          "operator": "notEquals",
+          "value": ""
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "Url",
+          "operator": "notEquals",
+          "value": ""
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "Location",
+          "operator": "notEquals",
+          "value": ""
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "AvatarUrl",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

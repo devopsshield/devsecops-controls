@@ -1,0 +1,26 @@
+﻿{
+  "name": "Enable Advanced Security",
+  "code": "ADO_Project_Repository_AdvancedSecurity_Enable_For_Repo",
+  "description": "Enable Advanced Security for your repository. A shield icon appears in the repository view for any repository with Advanced Security enabled. You can enable Advanced Security at the organization, project, or repository level. To access each of the scanning tools and results, you need to first enable Advanced Security. Advanced Security is billed based on the number of unique active committers across all enabled repositories in your subscription. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features",
+  "recommendation": "1. Go to Project Settings. \n2. Select Repos -> Repositories. \n3. Select the repository you want to enable Advanced Security for. \n4. Turn 'On' the setting 'Advanced Security'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS1320",
+  "policyRule": {
+    "target": "ADORepositoryAdvancedSecurityEnablement",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADORepositoryAdvancedSecurityEnablement",
+          "property": "AdvSecEnabled",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

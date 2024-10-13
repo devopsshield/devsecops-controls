@@ -1,0 +1,14 @@
+﻿[
+  {
+    "name": "GH_POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS",
+    "value": "(main|master|protected|release|live|prod|prd|live)",
+    "description": "Protect important branches using a regex pattern.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_REPO_DEFAULT_BRANCH_PATTERNS",
+    "value": "(main|master)",
+    "description": "The default branch name regex pattern.",
+    "type": "policyVariable"
+  }
+]

@@ -1,0 +1,90 @@
+﻿{
+  "name": "All Repositories - Branch Policies - Require a minimum number of reviewers",
+  "code": "ADO_Project_AllRepositories_BranchPolicy_Require_Min_Reviewers",
+  "description": "Protect important branches across all repositories in this project. Enable the 'Require a minimum number of reviewers' branch policy, so that every pull request gets reviewed by at least two approvers. This policy will ensure that a minimum number of reviewers have approved a pull request before completion. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#repositories-and-branches https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#require_reviewers https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Under 'All Repositories' page, click on Policies tab. \n4. Under 'Branch Policies' section, click on a branch from the list or click '+' to add a branch protection across all repositories. \n5. On the page 'Cross-Repository policies for' selected branch, under 'Branch Policies' section, turn 'On' the policy 'Require a minimum number of reviewers'. \n6. Configure the policy to match your standards and the current policy definition: Minimum number of reviewers: 2, Prohibit the most recent pusher from approving their own changes: ON, When new changes are pushed: ON (Require at least one approval on the last iteration).",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2060",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Require a minimum number of reviewers 
+          - Require approval from a specified number of reviewers on pull requests.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "match",
+          "value": "(Minimum number of reviewers)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsAllRepositoriesBranchScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MinimumApproverCount",
+          "operator": "greaterThan",
+          "value": 1
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.CreatorVoteCounts",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.AllowDownvotes",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.ResetOnSourcePush",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.RequireVoteOnLastIteration",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.ResetRejectionsOnSourcePush",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BlockLastPusherVote",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+﻿{
+  "name": "Repository size should remain small: < 1 GB and < 5 GB",
+  "code": "GH_Repository_Repository_Size_Limits",
+  "description": "Repository size limits: We recommend repositories remain small, ideally less than 1 GB, and less than 5 GB is strongly recommended. Smaller repositories are faster to clone and easier to work with and maintain. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/working-with-files/managing-large-files/about-large-files-on-github#repository-size-limits https://github.com/github/git-sizer",
+  "recommendation": "1. You can find advice and a tool for repository analysis in the github/git-sizer repository.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS5015",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        /* 
+          The size of the repository, in kilobytes. 
+          - 1 GB = 1048576
+          - 5 GB = 5242880
+        */
+        {
+          "resource": "GHRepository",
+          "property": "Size",
+          "operator": "lessThan",
+          "value": 1048576
+        },
+        {
+          "resource": "GHRepository",
+          "property": "Size",
+          "operator": "lessThan",
+          "value": 5242880
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

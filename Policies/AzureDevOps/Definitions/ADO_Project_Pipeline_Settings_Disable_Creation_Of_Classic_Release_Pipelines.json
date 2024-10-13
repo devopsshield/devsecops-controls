@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Disable creation of classic release pipelines",
+  "code": "ADO_Project_Pipeline_Settings_Disable_Creation_Of_Classic_Release_Pipelines",
+  "description": "Enable the setting 'Disable creation of classic release pipelines'. When this is enabled, no classic release pipelines, task groups, and deployment groups can be created / imported. Existing ones will continue to work. Learn more: https://devblogs.microsoft.com/devops/disable-creation-of-classic-pipelines",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Disable creation of classic release pipelines'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "medium",
+  "ruleId": "DOS2180",
+  "policyRule": {
+    "target": "ADOProjectPipelineGeneralSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineGeneralSettings",
+          "property": "DisableClassicReleasePipelineCreation",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

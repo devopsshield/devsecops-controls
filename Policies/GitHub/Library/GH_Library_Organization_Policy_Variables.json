@@ -1,0 +1,8 @@
+﻿[
+  {
+    "name": "GH_POLICY_VAR_ORGANIZATION_TRUSTED_PUBLISHER_PATTERNS",
+    "value": "(GitHub|Microsoft|DevOpsShield)",
+    "description": "Only install GitHub Apps and GitHub Actions from trusted publishers.",
+    "type": "policyVariable"
+  } 
+]

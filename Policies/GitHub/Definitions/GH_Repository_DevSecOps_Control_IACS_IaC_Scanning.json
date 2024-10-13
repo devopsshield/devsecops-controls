@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Infrastructure as Code Scanning (IACS)",
+  "code": "GH_Repository_DevSecOps_Control_IACS_IaC_Scanning",
+  "description": "Make sure that Infrastructure as Code (IaC) Scanning (IACS) is in place for your repository. Infrastructure as code (IaC) scanning is the process of analyzing and evaluating the security and compliance of infrastructure code. To reduce the risk that misconfigurations are deployed to the production environment, IaC scanning tools automatically check the infrastructure at the code level for noncompliance with security policies and standards. Learn more: https://appsecmap.com  https://learn.microsoft.com/en-us/azure/defender-for-cloud/iac-vulnerabilities https://owasp.org/www-project-devsecops-guideline/latest/ https://www.aquasec.com/cloud-native-academy/devsecops/infrastructure-as-code-iac/ https://www.microsoft.com/en-us/security/business/security-101/what-is-devsecops https://github.com/aquasecurity/tfsec https://github.com/tenable/terrascan https://github.com/bridgecrewio/checkov",
+  "recommendation": "1. Navigate to Repository -> Actions. \n2. Open your repository CI Pipeline. \n3. Ensure a IAC Scanning tool is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS6750",
+  "policyRule": {
+    "target": "GHActionsWorkflows",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHActionsWorkflows",
+          "property": "WorkflowsYaml",
+          "operator": "match",
+          "value": "$(GH_POLICY_VAR_DEVSECOPS_IACS_IAC_SCANNING_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

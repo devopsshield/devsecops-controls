@@ -1,0 +1,24 @@
+﻿{
+  "name": "GitHub Secure Repositories - General",
+  "code": "GH_Repository_BestPractices",
+  "description": "Secure your organization repositories by validating all the settings and applying best practices.",
+  "type": "builtIn",
+  "category": "repository",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GH_Repository_DefaultBranch_Main",
+    "GH_Repository_Repository_Size_Limits",
+    "GH_Repository_Policies_Disable_Private_Forking",
+    "GH_Repository_Visibility_Private",
+    "GH_Repository_Should_Have_Description",
+    "GH_Repository_Should_Have_Topics",
+    "GH_Repository_Policies_PullRequests_Enable_Allow_Auto_Merge",
+    "GH_Repository_Policies_PullRequests_Enable_Always_Suggest_Updating_PR_Branches",
+    "GH_Repository_Policies_PullRequests_Enable_Automatically_Delete_Head_Branches",
+    "GH_Repository_Security_VulnerabilityAlerts_No_Open_Critical_Severity",
+    "GH_Repository_Security_VulnerabilityAlerts_No_Open_High_Severity",
+    "GH_Repository_Security_VulnerabilityAlert_Critical_Severity_Is_Open",
+    "GH_Repository_Security_VulnerabilityAlert_High_Severity_Is_Open",
+    "GH_Repository_BranchProtectionRules_Protect_Your_Most_Important_Branches"
+  ]
+}

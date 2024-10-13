@@ -1,0 +1,32 @@
+﻿{
+  "name": "Do not use Azure Classic service connections to access an Azure subscription",
+  "code": "ADO_Project_ServiceConnection_Dont_Use_AzureClassic_Connections",
+  "description": "You should use the Azure Resource Manager service connection scoped to a resource group in your subscription. Delete the Azure Classic service connection and create a new ARM service connection to replace it.  Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scope-service-connections https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select the Azure Classic service connection. \n4. Click on the three dots button (top right). \n5. Click on Delete. \n6. Create a new service connection of type 'Azure Resource Manager'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2450",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpoint",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "DataAzureCloud.Environment",
+          "operator": "equals",
+          "value": "AzureCloud"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "Type",
+          "operator": "notEquals",
+          "value": "azure"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿{
+  "name": "Repository should always have a description",
+  "code": "GH_Repository_Should_Have_Description",
+  "description": "Make sure to provide a description for your repository. Adding a description will help users understand its purpose and when to use it. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/creating-and-managing-repositories/creating-a-new-repository",
+  "recommendation": "1. Go to your Repository. \n2. Select the 'Code' section. \n3. Under the 'About' section, click on the settings icon to edit the repository details. \n4. Ensure the 'Description' field is not empty. Provide a short description of this repository.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "low",
+  "ruleId": "DOS5030",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHRepository",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

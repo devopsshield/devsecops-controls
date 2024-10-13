@@ -1,0 +1,32 @@
+﻿{
+  "name": "Do not make the Environment accessible to all YAML Pipelines",
+  "code": "ADO_Project_PipelinePermissions_Environment_Dont_Grant_All_YAML_Pipelines_Access",
+  "description": "Environment must not be granted access to all YAML pipelines. Lock down the environment and only allow selected YAML pipelines to access it. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Environments \n2. Select an environment. \n3. Click on the three dots button. \n4. Click Security. \n5. Under 'Pipeline permissions' section, click 'Restrict Permission' to avoid granting access to all YAML pipelines. Add the YAML pipelines that need explicit access on this environment.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2290",
+  "policyRule": {
+    "target": "ADOProjectPipelinePermissions",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "environment"
+        },
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "AllPipelines.Authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

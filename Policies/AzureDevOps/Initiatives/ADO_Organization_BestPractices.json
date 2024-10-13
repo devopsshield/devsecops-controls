@@ -1,0 +1,17 @@
+﻿{
+  "name": "ADO Secure Organizations - General",
+  "code": "ADO_Organization_BestPractices",
+  "description": "Secure your organization by applying standards and best practices.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Organization_Limit_Min_Max_Admins",
+    "ADO_Organization_Artifacts_Settings_Restrict_Who_Can_Create_Feeds",
+    "ADO_Organization_Extensions_Restrict_To_Trusted_Publishers",
+    "ADO_Organization_Extensions_SecurityRoles_Restrict_Extension_Manager_Role_To_Admins",
+    "ADO_Organization_Users_Review_And_Revoke_Access_For_Inactive_Users",
+    "ADO_Organization_Users_Remove_Inactive_Guest_Users",
+    "ADO_Organization_AdvancedSecurity_Enable_For_New_Projects"
+  ]
+}

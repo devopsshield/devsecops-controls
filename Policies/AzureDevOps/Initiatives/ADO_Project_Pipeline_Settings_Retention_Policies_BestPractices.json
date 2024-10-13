@@ -1,0 +1,14 @@
+﻿{
+  "name": "ADO Secure Projects Pipeline Settings - Retention Policies",
+  "code": "ADO_Project_Pipeline_Settings_Retention_Policies_BestPractices",
+  "description": "Retention policies let you set how long to keep artifacts, symbols, attachments, runs, pull request runs and number of recent runs to retain per pipeline. Learn more about run retention: https://docs.microsoft.com/en-us/azure/devops/pipelines/policies/retention",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_Pipeline_Settings_Retention_Policy_Artifacts",
+    "ADO_Project_Pipeline_Settings_Retention_Policy_Runs",
+    "ADO_Project_Pipeline_Settings_Retention_Policy_PR_Runs",
+    "ADO_Project_Pipeline_Settings_Retention_Policy_Recent_Runs_To_Retain_Per_Pipeline"
+  ]
+}

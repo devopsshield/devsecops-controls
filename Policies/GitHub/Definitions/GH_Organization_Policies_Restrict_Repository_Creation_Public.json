@@ -1,0 +1,26 @@
+﻿{
+  "name": "Disable Public Repository Creation - Disallow members to create public repositories",
+  "code": "GH_Organization_Policies_Restrict_Repository_Creation_Public",
+  "description": "Restrict repository creation to private or internal. Restricting repository creation in your organization to help prevent sensitive information from being exposed. To protect your organization's data, you can configure permissions for creating repositories in your organization. Members should be able to create only private or internal repositories, visible to organization members with permission. Members will not be able to create public repositories, visible to anyone. Outside collaborators can never create repositories. Learn more: https://docs.github.com/en/enterprise-cloud@latest/code-security/getting-started/best-practices-for-preventing-data-leaks-in-your-organization#prevent-data-leaks https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/restricting-repository-creation-in-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Access' section of the sidebar, click Member privileges. \n3. Under the 'Repository creation' section. \n4. Ensure the 'Public' setting is disabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4025",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanCreatePublicRepositories",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

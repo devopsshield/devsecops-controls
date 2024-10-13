@@ -1,0 +1,48 @@
+﻿{
+  "name": "Repository Policies - Reserved names",
+  "code": "ADO_Project_Repository_RepoPolicy_Reserved_Names",
+  "description": "Enable the 'Reserved names' repository policy setting, so that you block pushes to a repository that contain file or folder names that are invalid on all platforms. This policy will reject pushes to a repository for names which aren't valid on all supported client OSes. Block pushes that introduce files, folders, or branch names that include platform reserved names or incompatible characters. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#reserved-names-policy https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Repository Policies' section, turn 'On' the policy 'Reserved names'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS3150",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Reserved names restriction
+          - This policy will reject pushes to a repository for names which aren't valid on all supported client OSes.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Reserved names restriction"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryScope",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

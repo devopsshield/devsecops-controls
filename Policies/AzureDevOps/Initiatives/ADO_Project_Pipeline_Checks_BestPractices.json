@@ -1,0 +1,16 @@
+﻿{
+  "name": "ADO Secure Projects - Pipeline resource protection - Checks",
+  "code": "ADO_Project_Pipeline_Checks_BestPractices",
+  "description": "Secure your projects' pipelines by configuring checks on your protected resources.",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_Pipeline_Checks_Environment_Production_Protect_With_Checks",
+    "ADO_Project_Pipeline_Checks_Environment_Configure_Branch_Control_Check_For_Production",
+    "ADO_Project_Pipeline_Checks_Environment_Configure_Approvals_For_Production",
+    "ADO_Project_Pipeline_Checks_ServiceConnection_Production_Protect_With_Checks",
+    "ADO_Project_Pipeline_Checks_ServiceConnection_Configure_Branch_Control_Check_For_Production",
+    "ADO_Project_Pipeline_Checks_ServiceConnection_Configure_Approvals_For_Production"
+  ]
+}

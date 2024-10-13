@@ -1,0 +1,54 @@
+﻿{
+  "name": "Repository Policies - Maximum path length (248)",
+  "code": "ADO_Project_Repository_RepoPolicy_Maximum_Path_Length",
+  "description": "Enable the 'Maximum path length' repository policy setting, so that you block pushes that contain files or directories with path lengths that are invalid on any platform. This policy will reject pushes to a repository for paths which exceed the specified length. Block pushes that introduce paths that exceed the specified length. The default maximum value is 248, because that maximum length is 100% supported across all three major platforms. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#maximum-path-length-policy https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Repository Policies' section, turn 'On' the policy 'Maximum path length' and configure the length to be 248 chars supported across all three major platforms.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS3140",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Path Length restriction
+          - This policy will reject pushes to a repository for paths which exceed the specified length.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Path Length restriction"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MaxPathLength",
+          "operator": "lessThan",
+          "value": 249 /* 248 chars is 100% supported across all three major platforms. */
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

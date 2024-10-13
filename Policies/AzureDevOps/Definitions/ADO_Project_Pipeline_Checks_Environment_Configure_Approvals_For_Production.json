@@ -1,0 +1,44 @@
+﻿{
+  "name": "Pipeline Protected Resources - Checks - Require approvals on each production environment",
+  "code": "ADO_Project_Pipeline_Checks_Environment_Configure_Approvals_For_Production",
+  "description": "Approvers should grant approval for deployment. Extend pipeline protection by configuring a manual approval check on each of your resources. This will automatically stop your pipeline from running on top of any user branches. Most pipelines need a second set of eyes look over changes (especially to the pipeline itself) before deploying to production. Checks allow you to pause the pipeline run until certain conditions are met. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources#checks https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Environments \n2. Select an environment. \n3. Click on 'Approvals and checks' tab. \n4. Click on '+' button to add a new 'Approvals' check and choose your 'Approvers'. \n6. Click 'Create' to add the check.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2135",
+  "policyRule": {
+    "target": "ADOProjectCheckConfiguration",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "environment"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Name",
+          "operator": "match",
+          "value": "$(POLICY_VAR_PROJECT_PROD_ENVIRONMENT_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Type.Name",
+          "operator": "equals",
+          "value": "Approval"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Approval.ApproversCount",
+          "operator": "greaterThan",
+          "value": 0
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Enable shell tasks arguments validation",
+  "code": "ADO_Project_Pipeline_Settings_Enable_Shell_Tasks_Arguments_Validation",
+  "description": "Enable shell tasks args sanitizing. When this is enabled, argument parameters for built-in shell tasks are validated to prevent additional shell commands from being executed. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/inputs#shellTasksValidation",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Enable shell tasks arguments validation'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2195",
+  "policyRule": {
+    "target": "ADOProjectPipelineGeneralSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineGeneralSettings",
+          "property": "EnableShellTasksArgsSanitizing",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

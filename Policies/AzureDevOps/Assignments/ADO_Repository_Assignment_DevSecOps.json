@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Repositories - DevSecOps Controls",
+  "description": "Secure your repositories by validating and monitoring the implementation of all DevSecOps controls: DevOps Scanning (DOS), Secret Scanning (SS), Software Composition Analysis (SCA), Static Application Security Testing (SAST), Container Image Scanning (CIS), IaC Scanning (IACS), Infrastructure Scanning (IS), Dynamic Application Security Testing (DAST), Interactive Application Security Testing (IAST), Continuous Scanning Tools (CST), DevOps Compliance Check (DOCC)",
+  "policyInitiativeCode": "ADO_Repository_DevSecOps_BestPractices"
+}

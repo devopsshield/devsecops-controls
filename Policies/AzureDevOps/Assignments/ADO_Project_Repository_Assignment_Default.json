@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Repositories - General",
+  "description": "Secure your repositories by validating the settings and applying best practices.",
+  "policyInitiativeCode": "ADO_Project_Repository_BestPractices"
+}

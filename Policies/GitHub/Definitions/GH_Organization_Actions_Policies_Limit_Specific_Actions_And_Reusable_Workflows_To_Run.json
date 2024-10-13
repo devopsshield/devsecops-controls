@@ -1,0 +1,58 @@
+﻿{
+  "name": "GitHub Actions - Allow only specific actions and reusable workflows to run",
+  "code": "GH_Organization_Actions_Policies_Limit_Specific_Actions_And_Reusable_Workflows_To_Run",
+  "description": "Limit GitHub Actions for your organization. Allow only specific actions and reusable workflows to run. Allow enterprise actions and reusable workflow. When you choose 'Allow enterprise, and select non-enterprise, actions and reusable workflows', local actions and reusable workflows are allowed, and there are additional options for allowing other specific actions and reusable workflows. Allow actions created by GitHub. Allow specified actions and reusable workflows: You can restrict workflows to use actions and reusable workflows in specific organizations and repositories. Specified actions cannot be set to more than 1000.  Learn more: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Code, planning, and automation' section of the sidebar, click on Actions -> General. \n3. Under the 'Policies' section. \n4. Ensure the 'Allow enterprise, and select non-enterprise, actions and reusable workflows' setting is selected. \n5. Ensure 'Allow actions created by GitHub' is checked. \n6. Using the field 'Allow specified actions and reusable workflows', add your required actions and reusable workflows to the list.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4330",
+  "policyRule": {
+    "target": "GHActionsPolicies",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHActionsPolicies",
+          "property": "AllowedActions",
+          "operator": "notEquals",
+          "value": "all"
+        },
+        {
+          "anyOf": [
+            {
+              "resource": "GHActionsPolicies",
+              "property": "AllowedActions",
+              "operator": "equals",
+              "value": "local_only"
+            },
+            /*
+              AllowedActions == "selected"
+              GitHubOwnedAllowed = true
+              VerifiedAllowed = false
+              PatternsAllowed.Length > 0
+            */
+            {
+              "resource": "GHActionsPolicies",
+              "property": "IsAllowedOnlyGitHubSelectedActions",
+              "operator": "equals",
+              "value": true
+            },
+            /*
+              AllowedActions == "selected"
+              PatternsAllowed.Length > 0
+            */
+            {
+              "resource": "GHActionsPolicies",
+              "property": "IsAllowedSelectedActions",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

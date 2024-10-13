@@ -1,0 +1,50 @@
+﻿[
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_SS_SECRET_SCANNING_TOOLS_PATTERNS",
+    "value": "(gitleaks|spectral|SpectralOps|git-secrets|git secrets|gittyleaks|detect-secrets|gitguardian|ggshield|trufflehog|trufflesecurity|githound|Semgrep)",
+    "description": "The DevSecOps regex pattern for Secret Scanning (SS) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_SCA_SOFTWARE_COMPOSITION_ANALYSIS_TOOLS_PATTERNS",
+    "value": "(dependency-review-action|AdvancedSecurity-Dependency-Scanning|cyclonedx|dependencytrack|dependency-track|WhiteSource|Mend|Veracode|Snyk|Checkmarx|CxSCA|checkmarx\/ast-github-action|Synopsys|SynopsysDetectTask|Spectral|OSV-Scanner|Semgrep|JFrog|osv-scanner-action)",
+    "description": "The DevSecOps regex pattern for Software Composition Analysis (SCA) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_SAST_STATIC_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS",
+    "value": "(codeql-action|AdvancedSecurity-Codeql-Analyze|microsoft\/security-devops-action|sonarqube-scan-action|sonarcloud-github-action|WhiteSource|Mend|Veracode|Snyk|Checkmarx|CxFlow|checkmarx\/ast-github-action|Semgrep|Fortify|Synopsys|coverity|HCL AppScan|appscan-sast|DeepScan|BinSkim|bandit|python-bandit-scan|JFrog|CodeThreat|codescan-scanner-action|ossar-action|contrastscan-action|apisec-run-scan|codacy-analysis-cli-action|pyre-action|msvc-code-analysis-action)",
+    "description": "The DevSecOps regex pattern for Static Application Security Testing (SAST) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_CIS_CONTAINER_IMAGE_SCANNING_TOOLS_PATTERNS",
+    "value": "(trivy|aqua|aquasec|snyk\/actions\/docker|grype|clair|sysdig|qualys|aquasecurity|tfsec-sarif-action|trivy-action)",
+    "description": "The DevSecOps regex pattern for Container Image Scanning (CIS) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_IACS_IAC_SCANNING_TOOLS_PATTERNS",
+    "value": "(Checkov|Tfsec|Terrascan|Trivy|Spectral|microsoft\/security-devops-action|TemplateAnalyzer|TFLint|Accurics|snyk\/actions\/iac|Zscaler-IaC-Action|prisma-cloud-shiftleft)",
+    "description": "The DevSecOps regex pattern for Infrastructure as Code (IaC) Scanning (IACS) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_IS_INFRASTRUCTURE_SCANNING_TOOLS_PATTERNS",
+    "value": "(Tenable|Nessus|Nexpose|portswigger|Burp|Nikto|Arachni|ecsypno|scnr|SAINT|InsightVM|Qualys)",
+    "description": "The DevSecOps regex pattern for Infrastructure Scanning (IS) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_DAST_DYNAMIC_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS",
+    "value": "(zap-stable|owaspzap|arachni|ecsypno|scnr|portswigger|Burp|Veracode|HCL-TECH-SOFTWARE|appscan-dast|soos-dast-github-action)",
+    "description": "The DevSecOps regex pattern for Dynamic Application Security Testing (DAST) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GH_POLICY_VAR_DEVSECOPS_IAST_INTERACTIVE_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS",
+    "value": "(Arachni|ecsypno|scnr|portswigger|Burp)",
+    "description": "The DevSecOps regex pattern for Interactive Application Security Testing (IAST) tools and providers used in pipelines.",
+    "type": "policyVariable"
+  }
+]

@@ -1,0 +1,26 @@
+﻿{
+  "name": "Default branch name should be main",
+  "code": "GH_Repository_DefaultBranch_Main",
+  "description": "The repository default branch name should be 'main'. This policy will ensure naming convention is consistent across each repository. You can change the default branch for a particular repository at any time. The default branch is considered the base branch in your repository, against which all pull requests and code commits are automatically made, unless you specify a different branch. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch",
+  "recommendation": "1. Navigate to Repository Settings. \n2. In the 'General' section of the sidebar, go to 'Default branch' section. \n3. Ensure 'main' is the default branch. \n4. Navigate to 'Code' and click on the View all branches. \n5. Ensure the 'Default' branch is the 'main' branch.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS5020",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHRepository",
+          "property": "DefaultBranchName",
+          "operator": "match",
+          "value": "$(GH_POLICY_VAR_REPO_DEFAULT_BRANCH_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+﻿{
+  "name": "Pipeline Settings - Disable building pull requests from forked repositories",
+  "code": "ADO_Organization_Pipeline_Settings_Disable_Building_Pull_Requests_From_Forked_Repositories",
+  "description": "Limit building pull requests from forked GitHub repositories. Disable building pull requests from forked repositories. With this enabled, No pipeline will build pull requests from forked repositories. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github#contributions-from-forks",
+  "recommendation": "1. Navigate to Organization Settings. \n2. Open the Settings link under Pipelines. \n3. Under the 'Triggers' section, turn 'On' the setting 'Limit building pull requests from forked GitHub repositories'. \n4. Turn 'On' the setting 'Disable building pull requests from forked repositories'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1075",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "ForkProtectionEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "BuildsEnabledForForks",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+﻿{
+  "name": "GH Secure Repositories - DevSecOps Controls",
+  "code": "GH_Repository_DevSecOps_BestPractices",
+  "description": "Secure your repositories by validating and monitoring the implementation of all DevSecOps controls: DevOps Scanning (DOS), Secret Scanning (SS), Software Composition Analysis (SCA), Static Application Security Testing (SAST), Container Image Scanning (CIS), IaC Scanning (IACS), Infrastructure Scanning (IS), Dynamic Application Security Testing (DAST), Interactive Application Security Testing (IAST), Continuous Scanning Tools (CST), DevOps Compliance Check (DOCC)",
+  "type": "builtIn",
+  "category": "appsec",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GH_Repository_DevSecOps_Control_SS_Secret_Scanning",
+    "GH_Repository_DevSecOps_Control_SCA_Software_Composition_Analysis",
+    "GH_Repository_DevSecOps_Control_SAST_Static_Application_Security_Testing",
+    "GH_Repository_DevSecOps_Control_CIS_Container_Image_Scanning",
+    "GH_Repository_DevSecOps_Control_IACS_IaC_Scanning",
+    "GH_Repository_DevSecOps_Control_IS_Infrastructure_Scanning",
+    "GH_Repository_DevSecOps_Control_DAST_Dynamic_Application_Security_Testing",
+    "GH_Repository_DevSecOps_Control_IAST_Interactive_Application_Security_Testing"
+  ]
+}

@@ -1,0 +1,11 @@
+﻿{
+  "name": "GitLab Secure Repositories - General",
+  "code": "GL_Repository_BestPractices",
+  "description": "Secure your repositories by validating all the settings and applying best practices.",
+  "type": "builtIn",
+  "category": "repository",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GL_Repository_DefaultBranch_Main"
+  ]
+}

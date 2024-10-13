@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Enforce job authorization scope to current project for release pipelines",
+  "code": "ADO_Organization_Pipeline_Settings_Limit_Release_Pipeline_Scope",
+  "description": "Limit job authorization scope to current project for release pipelines. Release pipelines can run with collection scoped access tokens unless this option is enabled. With this option enabled, you can reduce the scope of access for all release pipelines to the current project. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/secure-access-to-repos https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens#job-authorization-scope",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Settings. \n3. Turn 'On' the setting 'Limit job authorization scope to current project for release pipelines'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1140",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "EnforceJobAuthScopeForReleases",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

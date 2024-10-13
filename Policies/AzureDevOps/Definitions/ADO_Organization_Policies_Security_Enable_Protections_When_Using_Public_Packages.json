@@ -1,0 +1,32 @@
+﻿{
+  "name": "Enable Additional protections when using public package registries",
+  "code": "ADO_Organization_Policies_Security_Enable_Protections_When_Using_Public_Packages",
+  "description": "Additional protections when using public package registries. Learn more: https://devblogs.microsoft.com/devops/changes-to-azure-artifact-upstream-behavior https://learn.microsoft.com/en-us/azure/devops/artifacts/concepts/upstream-sources",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. Security policies. \n4. Turn 'On' the setting 'Additional protections when using public package registries'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1210",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.ArtifactsExternalPackageProtectionToken"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

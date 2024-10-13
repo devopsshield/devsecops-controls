@@ -1,0 +1,32 @@
+﻿{
+  "name": "Do not make the Secure File accessible to all YAML Pipelines",
+  "code": "ADO_Project_PipelinePermissions_SecureFile_Dont_Grant_All_YAML_Pipelines_Access",
+  "description": "Secure File must not be granted access to all YAML pipelines. Lock down the secure file and only allow selected YAML pipelines to access it. Information can be steal from the secure file if an unautorized user builds a YAML pipeline that can access the secure file. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Library \n2. Select a secure file. \n3. Click on 'Pipeline permissions'. \n4. Click on 'Restrict permission'. \n5. Click + to add the YAML pipeline that needs permission to the secure file.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2300",
+  "policyRule": {
+    "target": "ADOProjectPipelinePermissions",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "securefile"
+        },
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "AllPipelines.Authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

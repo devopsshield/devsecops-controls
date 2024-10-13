@@ -1,0 +1,5 @@
+﻿{
+  "name": "GitHub Assignment for Securing Repositories - General",
+  "description": "Secure your organization repositories by validating all the settings and applying best practices.",
+  "policyInitiativeCode": "GH_Repository_BestPractices"
+}

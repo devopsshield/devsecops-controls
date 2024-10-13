@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline - Enforce job authorization scope to only current project",
+  "code": "ADO_Project_Repository_Pipeline_JobAuthorizationScope_Project",
+  "description": "Secure access to repos from pipelines. Limit job authorization scope to current project for your pipeline. You can set the job authorization scope to be collection or project. Important: If the scope is not restricted at either the organization level or project level, then every job in your YAML pipeline gets a collection scoped job access token. In other words, your pipeline has access to any repository in any project of your organization. If an adversary is able to gain access to a single pipeline in a single project, they will be able to gain access to any repository in your organization. This is why, it is recommended that you restrict the scope at the highest level (organization settings) in order to contain the attack to a single project. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens#job-authorization-scope https://learn.microsoft.com/en-us/azure/devops/pipelines/security/secure-access-to-repos",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Limit job authorization scope to current project for non-release pipelines'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "critical",
+  "ruleId": "DOS3410",
+  "policyRule": {
+    "target": "ADOProjectPipeline",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipeline",
+          "property": "BuildDefinition.JobAuthorizationScope",
+          "operator": "equals",
+          "value": "project"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

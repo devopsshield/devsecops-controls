@@ -1,0 +1,26 @@
+﻿{
+  "name": "Disable Forking",
+  "code": "ADO_Project_Repository_Settings_Disable_Forking",
+  "description": "Disable repository forking. The more forks there are, the harder it is to keep track of each fork’s security. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#enable-forks",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Settings tab. \n5. Under 'Repository Settings' section, turn 'Off' the setting 'Forks'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3170",
+  "policyRule": {
+    "target": "ADOProjectGitRepositorySettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectGitRepositorySettings",
+          "property": "IsForksEnabled",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

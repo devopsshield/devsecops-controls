@@ -1,0 +1,11 @@
+﻿{
+  "name": "GitLab Secure Organizations - General",
+  "code": "GL_Organization_BestPractices",
+  "description": "Secure your organization by applying standards and best practices.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GL_Organization_Policies_Disable_Repository_Forking"
+  ]
+}

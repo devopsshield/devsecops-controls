@@ -1,0 +1,36 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Software Composition Analysis (SCA) / Dependency Scanning",
+  "code": "GH_Repository_DevSecOps_Control_SCA_Software_Composition_Analysis",
+  "description": "Make sure that Software Composition Analysis (SCA) / Dependency Scanning is in place for your repository. Scan your application for any vulnerabilities in open source components used in your source code. Dependency scanning detects the open source components used in your source code and detects if there are any associated vulnerabilities. Any found vulnerabilities from open source components get flagged as an alert. Dependency scanning generates an alert for any open-source component, direct or transitive, found to be vulnerable that your code depends upon. Direct vulnerabilities are the libraries your code directly uses. Transitive dependencies are the libraries or other software that direct dependencies use. Learn more: https://docs.github.com/en/code-security/supply-chain-security https://docs.github.com/en/code-security/dependabot https://appsecmap.com https://www.gartner.com/reviews/market/software-composition-analysis-sca",
+  "recommendation": "1. Navigate to Repository -> Actions. \n2. Open your repository CI Pipeline. \n3. Ensure a SCA / Dependency scanning tool for dependencies is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS6720",
+  "policyRule": {
+    "target": "GHActionsWorkflows",
+    "if": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "resource": "GHActionsWorkflows",
+              "property": "SecurityAndAnalysis.DependabotSecurityUpdates.Status",
+              "operator": "equals",
+              "value": "enabled"
+            },
+            {
+              "resource": "GHActionsWorkflows",
+              "property": "WorkflowsYaml",
+              "operator": "match",
+              "value": "$(GH_POLICY_VAR_DEVSECOPS_SCA_SOFTWARE_COMPOSITION_ANALYSIS_TOOLS_PATTERNS)"
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

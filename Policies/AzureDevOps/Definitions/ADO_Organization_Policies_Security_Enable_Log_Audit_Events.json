@@ -1,0 +1,33 @@
+﻿{
+  "name": "Enable Log Audit Events",
+  "code": "ADO_Organization_Policies_Security_Enable_Log_Audit_Events",
+  "description": "Log Audit Events. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#review-auditing-events https://learn.microsoft.com/en-us/azure/devops/organizations/audit/azure-devops-auditing",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. Security policies. \n4. Turn 'On' the setting 'Log Audit Events'. \n5. Make sure you configure at least one stream under General -> Auditing -> Streams.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1200",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.LogAuditEvents"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+

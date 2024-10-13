@@ -1,0 +1,26 @@
+﻿{
+  "name": "Ensure Repository Base permissions is set to 'No permission'",
+  "code": "GH_Organization_Policies_NoPermission_Repository_Base_Permissions",
+  "description": "Base permissions for an organization should be set to 'No permission'. Members will only be able to clone and pull public and internal repositories. To give a member additional access, you’ll need to add them to an authorized team or make them a collaborator on individual repositories. Base permissions to the organization’s repositories apply to all members and excludes outside collaborators. Since organization members can have permissions from multiple sources, members and collaborators who have been granted a higher level of access than the base permissions will retain their higher permission privileges. By default, members of an organization will have Read permissions to the organization's repositories. Learn more: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/setting-base-permissions-for-an-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Access' section of the sidebar, click Member privileges. \n3. Under the 'Base permissions' section. \n4. Ensure the 'No permission' setting is selected.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4010",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "DefaultRepositoryPermission",
+          "operator": "equals",
+          "value": "none"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

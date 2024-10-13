@@ -1,0 +1,32 @@
+﻿{
+  "name": "Do not make the Agent Pool accessible to all YAML Pipelines",
+  "code": "ADO_Project_PipelinePermissions_AgentPool_Dont_Grant_All_YAML_Pipelines_Access",
+  "description": "Agent Pool must not be granted access to all YAML pipelines. Lock down the agent pool and only allow selected YAML pipelines to access it. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources#pipeline-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions#set-individual-agent-pool-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Agent pools link under Pipelines. \n3. Select an agent pool. \n4. Click on Security tab. \n5. Review Pipeline permissions and click on 'Restrict permission' to only allowed pipelines.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2280",
+  "policyRule": {
+    "target": "ADOProjectPipelinePermissions",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "queue"
+        },
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "AllPipelines.Authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

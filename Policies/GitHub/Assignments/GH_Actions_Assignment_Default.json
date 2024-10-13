@@ -1,0 +1,5 @@
+﻿{
+  "name": "GitHub Assignment for Securing Actions - General",
+  "description": "Secure your GitHub Actions by applying standards and best practices.",
+  "policyInitiativeCode": "GH_Actions_BestPractices"
+}

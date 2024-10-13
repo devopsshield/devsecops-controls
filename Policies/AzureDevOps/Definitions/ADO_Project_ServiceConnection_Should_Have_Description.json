@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipelines - Service connection should have a description",
+  "code": "ADO_Project_ServiceConnection_Should_Have_Description",
+  "description": "Make sure to provide a description for your pipeline service connection. Adding a description will help users understand its purpose and when to use it. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on Edit button. \n5. Enter a Description. \n6. Click on 'Save'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2475",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpoint",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

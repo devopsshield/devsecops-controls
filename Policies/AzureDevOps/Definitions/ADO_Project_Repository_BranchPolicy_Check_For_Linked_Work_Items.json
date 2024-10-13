@@ -1,0 +1,54 @@
+﻿{
+  "name": "Branch Policies - Check for linked work items",
+  "code": "ADO_Project_Repository_BranchPolicy_Check_For_Linked_Work_Items",
+  "description": "Enable the 'Check for linked work items' branch policy, so that you require associations between PRs and work items when pull requests are completed. This policy will ensure work item management tracking by requiring associations between PRs and work items. Block pull requests from being completed unless they have at least one linked work item. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#check-for-linked-work-items https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Branch Policies' section, click on a branch from the list. \n6. With the branch selected, under 'Branch Policies' section, turn 'On' the policy 'Check for linked work items'. \n7. Configure the policy to be 'Required'.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3040",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Work item linking
+          - Encourage traceability by checking for linked work items on pull requests.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Work item linking"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryBranchScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

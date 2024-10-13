@@ -1,0 +1,8 @@
+﻿[
+  {
+    "name": "GL_POLICY_VAR_ORGANIZATION_TRUSTED_PUBLISHER_PATTERNS",
+    "value": "(GitLab|Microsoft|DevOpsShield)",
+    "description": "Only install extensions from trusted publishers.",
+    "type": "policyVariable"
+  } 
+]

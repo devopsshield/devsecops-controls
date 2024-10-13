@@ -1,0 +1,32 @@
+﻿{
+  "name": "Users - Remove access for inactive guest users",
+  "code": "ADO_Organization_Users_Remove_Inactive_Guest_Users",
+  "description": "Review inactive guest users and revoke their access. Inactive guest users must be removed to reduce the attack surface. Ensure only legitimate users have access to your organization resources. Go to Organization Settings -> Users. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices?view=azure-devops#removing-users",
+  "recommendation": "1. Go to Organization Settings. \n2. Select Users. \n3. Under 'All users' tab, filter by 'AAD User Type' as 'Guest User'. \n4. Review the 'Last Accessed' column, then revoke access for inactive users.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1250",
+  "policyRule": {
+    "target": "ADOUserEntitlement",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOUserEntitlement",
+          "property": "User.MetaType",
+          "operator": "equals",
+          "value": "guest"
+        },
+        {
+          "resource": "ADOUserEntitlement",
+          "property": "LastAccessedDate",
+          "operator": "lessThanPeriodDays",
+          "value": 90 /*No access in past 90 days.*/
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

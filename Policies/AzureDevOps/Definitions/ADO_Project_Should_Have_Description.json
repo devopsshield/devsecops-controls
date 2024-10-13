@@ -1,0 +1,26 @@
+﻿{
+  "name": "Project should have a description",
+  "code": "ADO_Project_Should_Have_Description",
+  "description": "Include a project description for clarity and purpose. Describe your project and make it easier for other people to understand it. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/projects/create-project",
+  "recommendation": "1. Navigate to Project Settings. \n2. Select General -> Overview. \n3. Enter a Description. \n4. Click on 'Save'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2335",
+  "policyRule": {
+    "target": "ADOTeamProjectReference",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOTeamProjectReference",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

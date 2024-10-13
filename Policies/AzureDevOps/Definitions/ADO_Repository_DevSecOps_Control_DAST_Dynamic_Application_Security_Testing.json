@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Dynamic Application Security Testing (DAST)",
+  "code": "ADO_Repository_DevSecOps_Control_DAST_Dynamic_Application_Security_Testing",
+  "description": "Make sure that Dynamic Application Security Testing (DAST) is in place for your repository. Dynamic application security testing emulates the methods a bad actor might use to attack an application. This testing occurs while the application is running and is based on predefined use cases. Web Application Vulnerability Scanners are automated tools that scan web applications, normally from the outside, to look for security vulnerabilities such as Cross-site scripting, SQL Injection, Command Injection, Path Traversal and insecure server configuration. DAST is a black-box testing method that scans applications in runtime. DAST is a good method for preventing regressions and does not depend on a specific programming language. Learn more: https://owasp.org/www-community/Vulnerability_Scanning_Tools https://owasp.org/www-community/Free_for_Open_Source_Application_Security_Tools https://appsecmap.com https://snyk.io/learn/application-security/dast-dynamic-application-security-testing/",
+  "recommendation": "1. Navigate to Project -> Pipelines. \n2. Open your repository CD Pipeline. \n3. Ensure a DAST scanning tool is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS3570",
+  "policyRule": {
+    "target": "ADORepositoryPipelines",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADORepositoryPipelines",
+          "property": "PipelinesFinalYaml",
+          "operator": "match",
+          "value": "$(ADO_POLICY_VAR_DEVSECOPS_DAST_DYNAMIC_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

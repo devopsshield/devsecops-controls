@@ -1,0 +1,83 @@
+﻿{
+  "name": "Branch Policies - Protect important branches with required policies",
+  "code": "ADO_Project_Repository_BranchPolicies_Protect_Important_Branches_With_Required_Policies",
+  "description": "Enable required branch policies, so that branches cannot be deleted and changes must be made via a pull request. This policy will ensure that best practice policies are required on each repository: Require a minimum number of reviewers, Check for linked work items, Check for comment resolution, Limit merge types, Build Validation policies, Status Check policies, and Automatically included reviewers. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies-overview https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Branch Policies' section, ensure the important branches have the icon 'Branch has policies' assigned. \n6. Click on a branch from the list. \n7. Ensure the required policies are turned on and configured to match your standards.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3010",
+  "policyRule": {
+    "target": "ADOProjectGitRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "HasBranchRequiredPolicies",
+          "operator": "equals",
+          "value": true
+        },
+        // Require a minimum number of reviewers
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "MinimumNumberOfReviewersPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        // Check for linked work items
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "WorkItemLinkingPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        // Check for comment resolution
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "CommentRequirementsPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        // Limit merge types
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "RequireAMergeStrategyPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        // Build Validation
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "BuildPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        // Status Checks
+        /*
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "StatusPolicy.HasRequiredPolicy",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "StatusPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        */
+        // Automatically included reviewers
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "RequiredReviewersPolicy.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

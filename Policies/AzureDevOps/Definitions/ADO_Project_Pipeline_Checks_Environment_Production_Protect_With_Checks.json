@@ -1,0 +1,38 @@
+﻿{
+  "name": "Pipeline Protected Resources - Checks - Protect your production environment with approvals and checks",
+  "code": "ADO_Project_Pipeline_Checks_Environment_Production_Protect_With_Checks",
+  "description": "Checks allow you to manage how this resource is used. Extend pipeline protection by configuring checks on each of your resources. Most pipelines need a second set of eyes look over changes (especially to the pipeline itself) before deploying to production. Checks allow you to pause the pipeline run until certain conditions are met. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources#checks https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Environments \n2. Select an environment. \n3. Click on 'Approvals and checks' tab. \n4. Click on 'Add your first check' / 'View all checks' to add one or more checks. \n5. Click 'Create' to add the check.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2145",
+  "policyRule": {
+    "target": "ADOProjectCheckConfiguration",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "environment"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Name",
+          "operator": "match",
+          "value": "$(POLICY_VAR_PROJECT_PROD_ENVIRONMENT_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "HasChecks",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

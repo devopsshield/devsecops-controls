@@ -1,0 +1,44 @@
+﻿{
+  "name": "Extensions - Security Roles - Restrict extension manager role to only administrators",
+  "code": "ADO_Organization_Extensions_SecurityRoles_Restrict_Extension_Manager_Role_To_Admins",
+  "description": "Allow only administrators to manage extensions in your organization. Review the users who have permission to manage extensions. Users with extension manager role can install/uninstall extensions and approve/decline extension requests. Learn more: https://learn.microsoft.com/en-us/azure/devops/marketplace/grant-permissions",
+  "recommendation": "1. Go to Organization Settings. \n2. Select Extensions. \n3. Click on the Security button. \n4. Review all 'Manager' role assignments.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1030",
+  "policyRule": {
+    "target": "ADOSecurityRoleAssignment",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ResourceType",
+          "operator": "equals",
+          "value": "OrganizationExtension"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ScopeId",
+          "operator": "equals",
+          "value": "ems.manage.ui"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Role.DisplayName",
+          "operator": "equals",
+          "value": "Manager"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Identity.DisplayName",
+          "operator": "match",
+          "value": "(Project Collection Administrators)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

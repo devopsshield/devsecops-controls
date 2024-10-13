@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Software Composition Analysis (SCA) / Dependency Scanning",
+  "code": "ADO_Repository_DevSecOps_Control_SCA_Software_Composition_Analysis",
+  "description": "Make sure that Software Composition Analysis (SCA) / Dependency Scanning is in place for your repository. Scan your application for any vulnerabilities in open source components used in your source code. Dependency scanning detects the open source components used in your source code and detects if there are any associated vulnerabilities. Any found vulnerabilities from open source components get flagged as an alert. Dependency scanning generates an alert for any open-source component, direct or transitive, found to be vulnerable that your code depends upon. Direct vulnerabilities are the libraries your code directly uses. Transitive dependencies are the libraries or other software that direct dependencies use. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/security/github-advanced-security-dependency-scanning https://appsecmap.com https://www.gartner.com/reviews/market/software-composition-analysis-sca",
+  "recommendation": "1. Navigate to Project -> Pipelines. \n2. Open your repository CI Pipeline. \n3. Ensure a SCA / Dependency scanning tool for dependencies is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS3520",
+  "policyRule": {
+    "target": "ADORepositoryPipelines",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADORepositoryPipelines",
+          "property": "PipelinesFinalYaml",
+          "operator": "match",
+          "value": "$(ADO_POLICY_VAR_DEVSECOPS_SCA_SOFTWARE_COMPOSITION_ANALYSIS_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

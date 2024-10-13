@@ -1,0 +1,26 @@
+﻿{
+  "name": "Default branch name should be main",
+  "code": "ADO_Project_Repository_DefaultBranch_Main",
+  "description": "The default branch name for all repositories should be 'main'. This policy will ensure naming convention is consistent across each repository. You can change the default branch for a particular repository at any time. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#default-branch-name https://learn.microsoft.com/en-us/azure/devops/repos/git/change-default-branch",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Click on Settings tab. \n4. Under 'All Repositories Settings' section, ensure the setting 'Default branch name for new repositories' is 'main'. \n5. Navigate to Project -> Repos -> Branches \n6. Select a repository from top drop down list. \n7. Ensure the 'Default' and 'Compare' labels are for the 'main' branch.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS3080",
+  "policyRule": {
+    "target": "ADOProjectGitRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectGitRepository",
+          "property": "DefaultBranch",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_DEFAULT_BRANCH_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

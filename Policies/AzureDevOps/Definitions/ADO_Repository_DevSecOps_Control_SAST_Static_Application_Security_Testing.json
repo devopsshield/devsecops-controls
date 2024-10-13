@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Static Application Security Testing (SAST) / Code Scanning",
+  "code": "ADO_Repository_DevSecOps_Control_SAST_Static_Application_Security_Testing",
+  "description": "Make sure that Static Application Security Testing (SAST) / Code Scanning is in place for your repository. Code scanning lets you analyze the code to find security vulnerabilities and coding errors. SAST tools play a crucial role in identifying security vulnerabilities within source code. These tools analyze code for potential flaws based on predefined security rules and policies. Before their code is compiled, DevSecOps developers begin testing their custom code for security vulnerabilities. This helps them fix issues without affecting the build. SAST tools make this process easier with automatic checks and real-time feedback. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/security/github-advanced-security-code-scanning https://appsecmap.com https://owasp.org/www-community/Source_Code_Analysis_Tools https://www.microsoft.com/en-us/security/business/security-101/what-is-devsecops",
+  "recommendation": "1. Navigate to Project -> Pipelines. \n2. Open your repository CI Pipeline. \n3. Ensure a SAST / Code scanning tool is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS3530",
+  "policyRule": {
+    "target": "ADORepositoryPipelines",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADORepositoryPipelines",
+          "property": "PipelinesFinalYaml",
+          "operator": "match",
+          "value": "$(ADO_POLICY_VAR_DEVSECOPS_SAST_STATIC_APPLICATION_SECURITY_TESTING_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Disable implied YAML CI trigger to prevent unintended pipeline runs",
+  "code": "ADO_Project_Pipeline_Settings_Disable_Implied_YAML_CI_Trigger",
+  "description": "Prevent unintended pipeline runs. Enable the setting 'Disable implied YAML CI trigger'. Trigger a pipeline only for code changes that match its trigger section. Do not trigger the pipeline if the trigger section is missing. Learn more: https://learn.microsoft.com/en-us/azure/devops/release-notes/2023/sprint-227-update#prevent-unintended-pipeline-runs https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/trigger",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Disable implied YAML CI trigger'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2190",
+  "policyRule": {
+    "target": "ADOProjectPipelineGeneralSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineGeneralSettings",
+          "property": "DisableImpliedYAMLCiTrigger",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects Pipeline Settings - General",
+  "description": "Secure projects' pipelines by managing the general pipeline settings.",
+  "policyInitiativeCode": "ADO_Project_Pipeline_Settings_BestPractices"
+}

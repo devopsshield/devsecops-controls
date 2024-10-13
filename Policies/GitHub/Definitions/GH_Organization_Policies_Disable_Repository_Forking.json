@@ -1,0 +1,26 @@
+﻿{
+  "name": "Disable Repository Forking",
+  "code": "GH_Organization_Policies_Disable_Repository_Forking",
+  "description": "Repository forking should be disabled. Organizations should never allow private or internal repositories to be forked. If enabled, forking is allowed on private, internal, and public repositories. If disabled, forking is only allowed on public repositories. This setting is also configurable per-repository. By default, new organizations are configured to disallow the forking of private and internal repositories. Learn more: https://docs.github.com/en/enterprise-cloud@latest/code-security/getting-started/best-practices-for-preventing-data-leaks-in-your-organization#prevent-data-leaks https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-the-forking-policy-for-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Access' section of the sidebar, click Member privileges. \n3. Under the 'Repository forking' section. \n4. Ensure the 'Allow forking of private and internal repositories' setting is disabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4015",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanForkPrivateRepositories",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

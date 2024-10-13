@@ -1,0 +1,54 @@
+﻿{
+  "name": "Security Roles - Restrict inherited common group access permissions on agent pool",
+  "code": "ADO_Project_SecurityRoles_AgentPool_Restrict_Inherited_Common_Group_Access",
+  "description": "Do not allow agent pools to inherit elavated permissions from project level user permissions. The groups (Contributors, Readers, Project Collection Valid Users, Project Valid Users) should not have elavated permissions (Admin/User). User permissions for certain groups must be restricted to read-only access. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scoped-permissions https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions-lookup-guide https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources?#user-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions#set-agent-pool-permissions",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Agent pools link under Pipelines. \n3. On 'Agent pools' page, click on Security button (top right). \n4. On 'User permissions' panel, review security roles and ensure common groups have only read-only access.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2350",
+  "policyRule": {
+    "target": "ADOSecurityRoleAssignment",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ResourceType",
+          "operator": "equals",
+          "value": "Project"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ScopeId",
+          "operator": "equals",
+          "value": "distributedtask.globalagentqueuerole"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Identity.DisplayName",
+          "operator": "contains",
+          "value": "$(POLICY_VAR_PROJECT_SECURITY_ROLES_COMMON_GROUPS)"
+        },
+        {
+          "anyOf": [
+            {
+              "resource": "ADOSecurityRoleAssignment",
+              "property": "Role.Name",
+              "operator": "equals",
+              "value": "Reader"
+            },
+            {
+              "resource": "ADOSecurityRoleAssignment",
+              "property": "Role.Name",
+              "operator": "equals",
+              "value": "Creator"
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

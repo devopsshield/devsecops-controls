@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects Pipeline Settings - Retention Policies",
+  "description": "Retention policies let you set how long to keep artifacts, symbols, attachments, runs, pull request runs and number of recent runs to retain per pipeline. Learn more about run retention: https://docs.microsoft.com/en-us/azure/devops/pipelines/policies/retention",
+  "policyInitiativeCode": "ADO_Project_Pipeline_Settings_Retention_Policies_BestPractices"
+}

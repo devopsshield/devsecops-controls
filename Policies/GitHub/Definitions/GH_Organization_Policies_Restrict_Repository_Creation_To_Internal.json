@@ -1,0 +1,32 @@
+﻿{
+  "name": "Restrict Repository Creation to Internal - Allow members to create internal repositories",
+  "code": "GH_Organization_Policies_Restrict_Repository_Creation_To_Internal",
+  "description": "Restricting repository creation in your organization to help prevent sensitive information from being exposed. To protect your organization's data, you can configure permissions for creating repositories in your organization. Members should be able to create internal repositories, visible to all enterprise members. Outside collaborators can never create repositories. Learn more: https://docs.github.com/en/enterprise-cloud@latest/code-security/getting-started/best-practices-for-preventing-data-leaks-in-your-organization#prevent-data-leaks https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/restricting-repository-creation-in-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Access' section of the sidebar, click Member privileges. \n3. Under the 'Repository creation' section. \n4. Ensure the 'Internal' setting is enabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4030",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "MembersAllowedRepositoryCreationType",
+          "operator": "equals",
+          "value": "private"
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanCreateInternalRepositories",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

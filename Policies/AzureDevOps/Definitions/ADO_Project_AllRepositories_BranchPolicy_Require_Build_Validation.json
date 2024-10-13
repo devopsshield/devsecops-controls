@@ -1,0 +1,79 @@
+﻿{
+  "name": "All Repositories - Branch Policies - Require Build Validation",
+  "code": "ADO_Project_AllRepositories_BranchPolicy_Require_Build_Validation",
+  "description": "Protect important branches across all repositories in this project. Enable the 'Build Validation' branch policy, so that you require pull request changes to build successfully before the PR can complete. The build policy evaluates the build results to determine whether the PR can be completed. Build must succeed in order to complete pull requests. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#build-validation https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Under 'All Repositories' page, click on Policies tab. \n4. Under 'Branch Policies' section, click on a branch from the list or click '+' to add a branch protection across all repositories. \n5. On the page 'Cross-Repository policies for' selected branch, under 'Build Validation' section, click on '+' button to add a new build policy. \n6. Ensure at least one policy is enabled.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2050",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Build Validation
+          - Validate code by pre-merging and building pull request changes.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "match",
+          "value": "(Build)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsAllRepositoriesBranchScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BuildDefinitionId",
+          "operator": "greaterThan",
+          "value": 0
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.QueueOnSourceUpdateOnly",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.ManualQueueOnly",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.ValidDuration",
+          "operator": "lessThan",
+          "value": 1441
+          /* < 24h = 1440 */
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

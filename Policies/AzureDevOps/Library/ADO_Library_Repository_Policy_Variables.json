@@ -1,0 +1,20 @@
+﻿[
+  {
+    "name": "POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS",
+    "value": "(refs\/heads)\/(main|master|protected|release|live|prod|prd|live)|DefaultBranch|refs\/heads[^\/]",
+    "description": "Protect important branches using a regex pattern. ADOProjectPolicyConfiguration - Settings.BranchRefNames property.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "POLICY_VAR_REPO_DEFAULT_BRANCH_PATTERNS",
+    "value": "(refs\/heads\/main|refs\/heads\/master)",
+    "description": "The default branch name regex pattern. ADOProjectGitRepository - DefaultBranch property.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "POLICY_VAR_REPO_COMMIT_AUTHOR_EMAIL_PATTERNS",
+    "value": "(\\*@devopsshield.com|\\*@cad4devops.com)",
+    "description": "Block pushes from including commits where the author email does not match the specified regex patterns. ADOProjectPolicyConfiguration - Settings.CommitAuthorEmailPatterns property.",
+    "type": "policyVariable"
+  }
+]

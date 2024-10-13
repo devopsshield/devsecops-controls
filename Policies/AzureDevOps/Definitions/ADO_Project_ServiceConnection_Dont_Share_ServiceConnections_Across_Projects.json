@@ -1,0 +1,26 @@
+﻿{
+  "name": "Do not share the Service Connection across multiple projects",
+  "code": "ADO_Project_ServiceConnection_Dont_Share_ServiceConnections_Across_Projects",
+  "description": "You should not share a service connection across multiple projects. Limit the access to the service connection to your current project to avoid unwanted data access from another project. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints#project-permissions---cross-project-sharing-of-service-connections https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on the three dots button. \n5. Click Security. \n6. Under 'Project permissions' section, make sure 'Only current project' has access and remove other projects that no more require access to the service connection.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2440",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpoint",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "ServiceEndpointProjectReferences.Count",
+          "operator": "equals",
+          "value": 1
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

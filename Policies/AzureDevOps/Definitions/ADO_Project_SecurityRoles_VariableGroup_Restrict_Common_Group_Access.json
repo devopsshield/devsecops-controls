@@ -1,0 +1,44 @@
+﻿{
+  "name": "Security Roles - Restrict common group access permissions on variable group",
+  "code": "ADO_Project_SecurityRoles_VariableGroup_Restrict_Common_Group_Access",
+  "description": "The groups (Contributors, Readers, Project Collection Valid Users, Project Valid Users) should not have elavated permissions (Admin/User). User permissions for certain groups must be restricted to read-only access. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scoped-permissions  https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions-lookup-guide https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources?#user-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions#set-library-permissions",
+  "recommendation": "1. Navigate to Project -> Pipelines -> Library \n2. On 'Library' page, click on 'Variable groups' tab. \n3. Select a variable group from the list. \n4. Click on Security button. \n5. Review security roles and ensure common groups have only read-only access.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2420",
+  "policyRule": {
+    "target": "ADOSecurityRoleAssignment",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ResourceType",
+          "operator": "equals",
+          "value": "VariableGroup"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "ScopeResource.ScopeId",
+          "operator": "equals",
+          "value": "distributedtask.variablegroup"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Identity.DisplayName",
+          "operator": "contains",
+          "value": "$(POLICY_VAR_PROJECT_SECURITY_ROLES_COMMON_GROUPS)"
+        },
+        {
+          "resource": "ADOSecurityRoleAssignment",
+          "property": "Role.Name",
+          "operator": "equals",
+          "value": "Reader"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

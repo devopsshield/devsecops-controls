@@ -1,0 +1,33 @@
+﻿{
+  "name": "Disallow Request Access Token",
+  "code": "ADO_Organization_Policies_User_Disable_Request_AccessToken",
+  "description": "Request access should be disabled. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/disable-request-access-policy",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. User policies. \n4. Turn 'Off' the setting 'Request access'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1230",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.AllowRequestAccessToken"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+

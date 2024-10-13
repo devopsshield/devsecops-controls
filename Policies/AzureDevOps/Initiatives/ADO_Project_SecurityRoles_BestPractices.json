@@ -1,0 +1,19 @@
+﻿{
+  "name": "ADO Secure Projects - Security Roles",
+  "code": "ADO_Project_SecurityRoles_BestPractices",
+  "description": "Secure your projects by restricting user permissions and assigned roles.",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_SecurityRoles_AgentPool_Restrict_Common_Group_Access",
+    "ADO_Project_SecurityRoles_Environment_Restrict_Common_Group_Access",
+    "ADO_Project_SecurityRoles_SecureFile_Restrict_Common_Group_Access",
+    "ADO_Project_SecurityRoles_ServiceConnection_Restrict_Common_Group_Access",
+    "ADO_Project_SecurityRoles_VariableGroup_Restrict_Common_Group_Access",
+    "ADO_Project_SecurityRoles_AgentPool_Restrict_Inherited_Common_Group_Access",
+    "ADO_Project_SecurityRoles_Environment_Restrict_Inherited_Common_Group_Access",
+    "ADO_Project_SecurityRoles_Library_Restrict_Inherited_Common_Group_Access",
+    "ADO_Project_SecurityRoles_ServiceConnection_Restrict_Inherited_Common_Group_Access"
+  ]
+}

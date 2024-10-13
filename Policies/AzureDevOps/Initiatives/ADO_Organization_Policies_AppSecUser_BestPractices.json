@@ -1,0 +1,19 @@
+﻿{
+  "name": "ADO Secure Organizations Security Policies",
+  "code": "ADO_Organization_Policies_AppSecUser_BestPractices",
+  "description": "Secure organizations by managing the security policies.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Organization_Policies_AppConnection_Disable_OAuth_App_Access",
+    "ADO_Organization_Policies_AppConnection_Disable_SSH_Access",
+    "ADO_Organization_Policies_Security_Dont_Allow_Public_Projects",
+    "ADO_Organization_Policies_Security_Enable_AAD_Conditional_Access",
+    "ADO_Organization_Policies_Security_Enable_Log_Audit_Events",
+    "ADO_Organization_Policies_Security_Enable_Protections_When_Using_Public_Packages",
+    "ADO_Organization_Policies_User_Disable_Team_Admins_Invitations",
+    "ADO_Organization_Policies_User_Disable_Guest_Users",
+    "ADO_Organization_Policies_User_Disable_Request_AccessToken"
+  ]
+}

@@ -1,0 +1,31 @@
+﻿{
+  "name": "ADO Secure Projects - General",
+  "code": "ADO_Project_BestPractices",
+  "description": "Secure your projects by ensuring private visibility and validating the settings.",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_Limit_Min_Max_Admins",
+    "ADO_Project_Private_Visibility",
+    "ADO_Project_Should_Have_Description",
+    "ADO_Project_Team_Should_Have_Description",
+    "ADO_Project_AllRepositories_RepoPolicy_Commit_Author_Email_Validation",
+    "ADO_Project_AllRepositories_RepoPolicy_Case_Enforcement",
+    "ADO_Project_AllRepositories_RepoPolicy_Reserved_Names",
+    "ADO_Project_AllRepositories_RepoPolicy_Maximum_Path_Length",
+    "ADO_Project_AllRepositories_RepoPolicy_Maximum_File_Size",
+    "ADO_Project_AllRepositories_BranchPolicy_Require_Min_Reviewers",
+    "ADO_Project_AllRepositories_BranchPolicy_Check_For_Linked_Work_Items",
+    "ADO_Project_AllRepositories_BranchPolicy_Check_For_Comment_Resolution",
+    "ADO_Project_AllRepositories_BranchPolicy_Limit_Merge_Types",
+    "ADO_Project_AllRepositories_BranchPolicy_Require_Build_Validation",
+    "ADO_Project_AllRepositories_BranchPolicy_Automatically_Include_Code_Reviewers",
+    "ADO_Project_AllRepositories_SecurityPermissions_Dont_Allow_Bypass_Policies",
+    "ADO_Project_ServiceConnection_Should_Have_Description",
+    "ADO_Project_Pipelines_Library_Environment_Should_Have_Description",
+    "ADO_Project_Pipelines_Library_VariableGroup_Should_Have_Description",
+    "ADO_Project_Pipelines_Library_VariableGroup_Link_Secrets_From_AKV",
+    "ADO_Project_AdvancedSecurity_Enable_For_New_Repos"
+  ]
+}

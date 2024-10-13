@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Retention Policy - Days to keep Artifacts (>= 30)",
+  "code": "ADO_Project_Pipeline_Settings_Retention_Policy_Artifacts",
+  "description": "Retention policy - Days to keep artifacts, symbols and attachments (>= 30). Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/retention",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Set the number of days to keep artifacts, symbols, and attachments.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2240",
+  "policyRule": {
+    "target": "ADOProjectPipelineRetentionSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineRetentionSettings",
+          "property": "PurgeArtifacts.Value",
+          "operator": "greaterThan",
+          "value": 29
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

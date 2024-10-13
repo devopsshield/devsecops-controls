@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Disable stage chooser",
+  "code": "ADO_Organization_Pipeline_Settings_Disable_Stage_Chooser",
+  "description": "Enable the setting 'Disable stage chooser'. With this enabled, users will not be able to select stages to skip from the Queue Pipeline panel. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Settings. \n3. Turn 'On' the setting 'Disable stage chooser'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "low",
+  "ruleId": "DOS1110",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "DisableStageChooser",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

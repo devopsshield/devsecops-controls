@@ -1,0 +1,26 @@
+﻿{
+  "name": "Artifacts - Restrict feeds creation to only administrators",
+  "code": "ADO_Organization_Artifacts_Settings_Restrict_Who_Can_Create_Feeds",
+  "description": "Allow only administrators to create feeds in your organization. Learn more: https://learn.microsoft.com/en-us/azure/devops/artifacts/feeds/feed-permissions",
+  "recommendation": "1. Go to Artifacts. \n2. Click on Azure Artifacts Settings button. \n3. Review 'Who can create feeds' and select 'Only administrators and these users can create feeds'. Grant this permission to a limited set of users/groups.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1010",
+  "policyRule": {
+    "target": "ADOArtifactSettingsGlobalPermissions",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOArtifactSettingsGlobalPermissions",
+          "property": "OnlyAdministratorRole",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

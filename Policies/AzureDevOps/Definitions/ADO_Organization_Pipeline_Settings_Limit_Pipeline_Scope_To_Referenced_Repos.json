@@ -1,0 +1,28 @@
+﻿{
+  "name": "Pipeline Settings - Enforce access to repositories in YAML pipelines.",
+  "code": "ADO_Organization_Pipeline_Settings_Limit_Pipeline_Scope_To_Referenced_Repos",
+  "description": "Protect access to repositories in YAML pipelines. Restricts the scope of access for all pipelines to only repositories explicitly referenced by the pipeline. Apply checks and approvals when accessing repositories from YAML pipelines. Also, generate a job access token that is scoped to repositories that are explicitly referenced in the YAML pipeline. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/secure-access-to-repos https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens#protect-access-to-repositories-in-yaml-pipelines https://devblogs.microsoft.com/devops/pipeline-stealing-another-repo/",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Settings. \n3. Turn 'On' the setting 'Protect access to repositories in YAML pipelines'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1130",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "EnforceReferencedRepoScopedToken",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+
+

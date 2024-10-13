@@ -1,0 +1,54 @@
+﻿{
+  "name": "All Repositories - Repository Policies - Case enforcement",
+  "code": "ADO_Project_AllRepositories_RepoPolicy_Case_Enforcement",
+  "description": "Enable the 'Case enforcement' repository policy setting, so that you block contributors from introducing case-only differences. Avoid case-sensitivity conflicts by blocking pushes that change name casing on files, folders, branches, and tags. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#case-enforcement-policy https://learn.microsoft.com/en-us/azure/devops/repos/git/os-compatibility  https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Under 'All Repositories' page, click on Policies tab. \n4. Under 'Repository Policies' section, turn 'On' the policy 'Case enforcement'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "medium",
+  "ruleId": "DOS2070",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Git repository settings
+          - Case enforcement policy
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "match",
+          "value": "(Git repository settings)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsAllRepositoriesScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.EnforceConsistentCase",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

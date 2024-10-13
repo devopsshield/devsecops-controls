@@ -1,0 +1,26 @@
+﻿{
+  "name": "Repository should be classified with topics",
+  "code": "GH_Repository_Should_Have_Topics",
+  "description": "Classifying your repository with topics. To help other people find and contribute to your project, you can add topics to your repository related to your project's intended purpose, subject area, affinity groups, or other important qualities. Learn more: https://docs.github.com/en/enterprise-cloud@latest/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics",
+  "recommendation": "1. Go to your Repository. \n2. Select the 'Code' section. \n3. Under the 'About' section, click on the settings icon to edit the repository details. \n4. Ensure the 'Topics' field is not empty.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "low",
+  "ruleId": "DOS5040",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHRepository",
+          "property": "HasTopics",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

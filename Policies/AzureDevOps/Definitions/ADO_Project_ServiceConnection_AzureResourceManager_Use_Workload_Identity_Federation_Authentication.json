@@ -1,0 +1,44 @@
+﻿{
+  "name": "Azure service connection should use Workload Identity federation with OpenID Connect for authentication",
+  "code": "ADO_Project_ServiceConnection_AzureResourceManager_Use_Workload_Identity_Federation_Authentication",
+  "description": "Use workload identity federation for your Azure Resource Manager (ARM) service connections. Workload identity federation allows you to create secret-free service connections in Azure Pipelines to Azure. Convert your existing Azure Resource Manager service connections which use secrets to authenticate to leverage Workload identity federation instead, for improved security and simplified maintenance. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scope-service-connections https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure?#create-an-azure-resource-manager-service-connection-using-workload-identity-federation https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints https://devblogs.microsoft.com/premier-developer/azure-devops-workload-identity-federation/",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection of type 'Azure Resource Manager'. \n4. Click on Convert button to 'Convert your service connections to workload identity federation for improved security and simplified maintenance.'. \n5. Accept the changes by clicking Convert.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2430",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpoint",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "Type",
+          "operator": "equals",
+          "value": "azurerm"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "DataAzureCloud.Environment",
+          "operator": "equals",
+          "value": "AzureCloud"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "DataAzureCloud.CreationMode",
+          "operator": "match",
+          "value": "(automatic|manual)"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "Authorization.Scheme",
+          "operator": "equals",
+          "value": "WorkloadIdentityFederation"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

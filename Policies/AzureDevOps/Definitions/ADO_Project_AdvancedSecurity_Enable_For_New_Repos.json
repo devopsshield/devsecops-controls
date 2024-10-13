@@ -1,0 +1,26 @@
+﻿{
+  "name": "Enable Advanced Security for new Repositories",
+  "code": "ADO_Project_AdvancedSecurity_Enable_For_New_Repos",
+  "description": "Automatically enable Advanced Security for new repositories. New repositories in this project will be initialized with Advanced Security enabled by default. Advanced Security can be disabled on a repository at any time. Advanced Security is billed based on the number of unique active committers across all enabled repositories in your subscription. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features",
+  "recommendation": "1. Go to Project Settings. \n2. Select Repos -> Repositories. \n3. Select the Settings tab. \n4. Turn 'On' the setting 'Automatically enable Advanced Security for new repositories'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS1310",
+  "policyRule": {
+    "target": "ADOProjectAdvancedSecurityEnablement",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectAdvancedSecurityEnablement",
+          "property": "EnableOnCreate",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

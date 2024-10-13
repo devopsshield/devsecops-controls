@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Enforce job authorization scope to current project for non-release pipelines",
+  "code": "ADO_Organization_Pipeline_Settings_Limit_Non_Release_Pipeline_Scope",
+  "description": "Limit job authorization scope to current project for non-release pipelines. If enabled, scope of access for all pipelines reduces to the current project. Non-Release Pipelines can run with collection scoped access tokens unless this option is enabled. With this option enabled, you can reduce the scope of access for all non-release pipelines to the current project. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/secure-access-to-repos https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens#job-authorization-scope",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Settings. \n3. Turn 'On' the setting 'Limit job authorization scope to current project for non-release pipelines'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS1120",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "EnforceJobAuthScope",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

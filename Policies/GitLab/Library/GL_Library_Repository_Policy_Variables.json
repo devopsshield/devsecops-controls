@@ -1,0 +1,14 @@
+﻿[
+  {
+    "name": "GL_POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS",
+    "value": "(refs\/heads)\/(main|master|protected|release|live|prod|prd|live)|DefaultBranch|refs\/heads[^\/]",
+    "description": "Protect important branches using a regex pattern.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "GL_POLICY_VAR_REPO_DEFAULT_BRANCH_PATTERNS",
+    "value": "(refs\/heads\/main|refs\/heads\/master)",
+    "description": "The default branch name regex pattern.",
+    "type": "policyVariable"
+  }
+]

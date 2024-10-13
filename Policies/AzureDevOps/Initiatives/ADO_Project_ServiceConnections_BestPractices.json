@@ -1,0 +1,18 @@
+﻿{
+  "name": "ADO Secure Projects - Service Connections",
+  "code": "ADO_Project_ServiceConnections_BestPractices",
+  "description": "Secure your projects' services connections by configuring the permissions and securing your connections.",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_PipelinePermissions_ServiceConnection_Dont_Grant_All_YAML_Pipelines_Access",
+    "ADO_Project_ServiceConnection_Dont_Use_AzureClassic_Connections",
+    "ADO_Project_ServiceConnection_Review_Inactive_ServiceConnections",
+    "ADO_Project_ServiceConnection_Dont_Share_ServiceConnections_Across_Projects",
+    "ADO_Project_ServiceConnection_Limit_ScopeLevel_To_Use_Least_Privilege_Access",
+    "ADO_Project_ServiceConnection_AzureResourceManager_Use_Workload_Identity_Federation_Authentication",
+    "ADO_Project_SecurityRoles_ServiceConnection_Restrict_Common_Group_Access",
+    "ADO_Project_ServiceConnection_Should_Have_Description"
+  ]
+}

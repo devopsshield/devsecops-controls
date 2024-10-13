@@ -1,0 +1,72 @@
+﻿{
+  "name": "All Repositories - Branch Policies - Limit merge types",
+  "code": "ADO_Project_AllRepositories_BranchPolicy_Limit_Merge_Types",
+  "description": "Protect important branches across all repositories in this project. Enable the 'Limit merge types' branch policy, so that you control the branch history by limiting the available types of merge when pull requests are completed. This policy will ensure consistent branch history by enforcing a merge strategy for pull request completion. Defaults to 'Basic merge (no fast-forward)' - Preserves history exactly as it happened during development. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#limit-merge-types https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Under 'All Repositories' page, click on Policies tab. \n4. Under 'Branch Policies' section, click on a branch from the list or click '+' to add a branch protection across all repositories. \n5. On the page 'Cross-Repository policies for' selected branch, under 'Branch Policies' section, turn 'On' the policy 'Limit merge types'. \n6. Configure the policy to match your standards and update the policy definition.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2040",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Require a merge strategy
+          - Maintain a consistent branch history by enforcing a merge strategy for PR completion
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "match",
+          "value": "(Require a merge strategy)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsAllRepositoriesBranchScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.BranchRefNames",
+          "operator": "match",
+          "value": "$(POLICY_VAR_REPO_PROTECTED_BRANCH_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MergeStrategy_AllowNoFastForward",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MergeStrategy_AllowSquash",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MergeStrategy_AllowRebase",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.MergeStrategy_AllowRebaseMerge",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

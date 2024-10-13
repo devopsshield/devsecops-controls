@@ -1,0 +1,54 @@
+﻿{
+  "name": "Repository Policies - Commit author email validation",
+  "code": "ADO_Project_Repository_RepoPolicy_Commit_Author_Email_Validation",
+  "description": "Enable the 'Commit author email validation' branch policy, so that you block commits to a repository by commit authors whose email addresses don't match a pattern. This policy will block pushes from including commits where the author email does not match the specified patterns. Learn more: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?#commit-author-email-validation-policy https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#repositories-and-branches",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Repositories link under Repos. \n3. Select a repository from the list. \n4. Click on Policies tab. \n5. Under 'Repository Policies' section, turn 'On' the policy 'Commit author email validation' and configure the author email patterns.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "high",
+  "ruleId": "DOS3110",
+  "policyRule": {
+    "target": "ADOProjectPolicyConfiguration",
+    "if": {
+      "allOf": [
+        /* 
+          Commit author email validation
+          - This policy will block pushes from including commits where the author email does not match the specified patterns.
+        */
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Type.DisplayName",
+          "operator": "equals",
+          "value": "Commit author email validation"
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsEnabled",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "IsBlocking",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.IsRepositoryScope",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "resource": "ADOProjectPolicyConfiguration",
+          "property": "Settings.CommitAuthorEmailPatterns",
+          "operator": "matchAll",
+          "value": "$(POLICY_VAR_REPO_COMMIT_AUTHOR_EMAIL_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

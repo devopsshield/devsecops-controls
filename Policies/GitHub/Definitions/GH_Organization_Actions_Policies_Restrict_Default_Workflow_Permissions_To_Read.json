@@ -1,0 +1,26 @@
+﻿{
+  "name": "Workflow permissions - Default workflow permissions granted to the GITHUB_TOKEN should be restricted to read-only access",
+  "code": "GH_Organization_Actions_Policies_Restrict_Default_Workflow_Permissions_To_Read",
+  "description": "As a good security practice, you should grant the GITHUB_TOKEN the least required access. Read should be the default permissions granted to the GITHUB_TOKEN when running workflows in your organization. You can specify more granular permissions in the workflow using YAML. Workflows have read permissions in the repository for the contents and packages scopes only. Learn more: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token https://docs.github.com/en/enterprise-cloud@latest/actions/security-guides/security-hardening-for-github-actions#restricting-permissions-for-tokens https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#setting-the-permissions-of-the-github_token-for-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Code, planning, and automation' section of the sidebar, click on Actions -> General. \n3. Under the 'Workflow permissions' section. \n4. Ensure the 'Read repository contents and packages permissions' setting is selected.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4300",
+  "policyRule": {
+    "target": "GHActionsPolicies",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHActionsPolicies",
+          "property": "DefaultWorkflowPermissions",
+          "operator": "equals",
+          "value": "read"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

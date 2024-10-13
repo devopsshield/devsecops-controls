@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Limit variables that can be set at queue time",
+  "code": "ADO_Project_Pipeline_Settings_Limit_Settable_Variables_At_Queue_Time",
+  "description": "Enforce settable variables. If enabled, only those variables that are explicitly marked as 'Settable at queue time' can be set at queue time. You can set any variables at queue time unless this option is enabled. With this option enabled, only those variables that are explicitly marked as 'Settable at queue time' can be set.  Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/inputs https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Limit variables that can be set at queue time'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2230",
+  "policyRule": {
+    "target": "ADOProjectPipelineGeneralSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineGeneralSettings",
+          "property": "EnforceSettableVar",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

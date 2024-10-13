@@ -1,0 +1,38 @@
+﻿{
+  "name": "Restrict GitHub Pages Creation - Disallow members to publish sites",
+  "code": "GH_Organization_Policies_Restrict_GitHub_Pages_Creation",
+  "description": "Restrict pages creation in your organization to help prevent sensitive information from being exposed. To protect your organization's data, you can configure permissions for creating pages in your organization. Members should not be able to create public sites, visible to anyone. Members should not be able to create private sites, visible to anyone with permission. Learn more: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-the-publication-of-github-pages-sites-for-your-organization",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Access' section of the sidebar, click Member privileges. \n3. Under the 'Pages creation' section. \n4. Ensure the 'Public' and 'Private' settings are disabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS4040",
+  "policyRule": {
+    "target": "GHOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanCreatePages",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanCreatePublicPages",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "resource": "GHOrganization",
+          "property": "MembersCanCreatePrivatePages",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

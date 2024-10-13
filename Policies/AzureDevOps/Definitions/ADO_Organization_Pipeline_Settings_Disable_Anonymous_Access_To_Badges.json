@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Disable anonymous access to badges",
+  "code": "ADO_Organization_Pipeline_Settings_Disable_Anonymous_Access_To_Badges",
+  "description": "Status badges are private. Anonymous users can access the status badge API for all pipelines unless this option is enabled. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?#add-a-status-badge-to-your-repository",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Settings. \n3. Turn 'On' the setting 'Disable anonymous access to badges'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "low",
+  "ruleId": "DOS1070",
+  "policyRule": {
+    "target": "ADOOrganizationPipelineSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPipelineSettings",
+          "property": "StatusBadgesArePrivate",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

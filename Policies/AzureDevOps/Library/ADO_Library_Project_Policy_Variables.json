@@ -1,0 +1,26 @@
+﻿[
+  {
+    "name": "POLICY_VAR_PROJECT_PROD_SERVICE_CONNECTION_PATTERNS",
+    "value": "(production|prod|prd|uat|live|protected|main|master)",
+    "description": "Protect your production service connection with checks. ADOProjectCheckConfiguration - Resource.Name property. Resource.Type = endpoint",
+    "type": "policyVariable"
+  },
+  {
+    "name": "POLICY_VAR_PROJECT_PROD_ENVIRONMENT_PATTERNS",
+    "value": "(production|prod|prd|uat|live|protected|main|master)",
+    "description": "Protect your production environment with checks. ADOProjectCheckConfiguration - Resource.Name property. Resource.Type = environment",
+    "type": "policyVariable"
+  },
+  {
+    "name": "POLICY_VAR_PROJECT_SECURITY_ROLES_COMMON_GROUPS",
+    "value": "Contributors,Readers,Project Collection Valid Users,Project Valid Users",
+    "description": "User permissions for certain common groups must be restricted to read-only access. ADOSecurityRoleAssignment - Identity.DisplayName property.",
+    "type": "policyVariable"
+  },
+  {
+    "name": "POLICY_VAR_PROJECT_SECURITY_ROLES_GLOBAL_GROUPS",
+    "value": "Project Collection Administrators,Project Collection Build Administrators,Project Administrators,Build Administrators,Release Administrators,Project Collection Service Accounts,Project Collection Build Service Accounts,Project Collection Proxy Service Accounts,Security Service Group,Endpoint Creators,Contributors,Readers,Project Collection Valid Users,Project Valid Users",
+    "description": "User permissions for global groups must be restricted to read-only access. ADOSecurityRoleAssignment - Identity.DisplayName property.",
+    "type": "policyVariable"
+  }
+]

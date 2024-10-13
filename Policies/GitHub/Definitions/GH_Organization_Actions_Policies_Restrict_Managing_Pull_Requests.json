@@ -1,0 +1,26 @@
+﻿{
+  "name": "Workflow permissions - Prevent GitHub Actions workflows from creating or approving pull requests",
+  "code": "GH_Organization_Actions_Policies_Restrict_Managing_Pull_Requests",
+  "description": "Prevent GitHub Actions workflows from creating or approving pull requests. Allowing workflows, or any other automation, to create or approve pull requests could be a security risk if the pull request is merged without proper oversight. By default, when you create a new organization, workflows are not allowed to create or approve pull requests. Learn more: https://docs.github.com/en/enterprise-cloud@latest/actions/security-guides/security-hardening-for-github-actions#preventing-github-actions-from-creating-or-approving-pull-requests https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#preventing-github-actions-from-creating-or-approving-pull-requests ",
+  "recommendation": "1. Go to Organization Settings. \n2. In the 'Code, planning, and automation' section of the sidebar, click on Actions -> General. \n3. Under the 'Workflow permissions' section. \n4. Ensure the 'Allow GitHub Actions to create and approve pull requests' setting is disabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS4320",
+  "policyRule": {
+    "target": "GHActionsPolicies",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHActionsPolicies",
+          "property": "CanApprovePullRequestReviews",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

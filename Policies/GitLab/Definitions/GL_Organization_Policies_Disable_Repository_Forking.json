@@ -1,0 +1,26 @@
+﻿{
+  "name": "Disable Repository Forking",
+  "code": "GL_Organization_Policies_Disable_Repository_Forking",
+  "description": "Repository forking should be disabled. Organizations should never allow private or internal repositories to be forked. If enabled, forking is allowed on private, internal, and public repositories. If disabled, forking is only allowed on public repositories. This setting is also configurable per-repository. By default, new organizations are configured to disallow the forking of private and internal repositories. Learn more: ",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Member privileges left menu. \n3. Under the 'Repository forking' section. \n4. Ensure the 'Allow forking of private and internal repositories' setting is disabled.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "critical",
+  "ruleId": "DOS6010",
+  "policyRule": {
+    "target": "GLOrganization",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GLOrganization",
+          "property": "members_can_fork_private_repositories",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

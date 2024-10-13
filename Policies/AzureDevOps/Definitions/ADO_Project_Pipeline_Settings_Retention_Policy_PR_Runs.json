@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Retention Policy - Days to keep Pull Request Runs (>= 10)",
+  "code": "ADO_Project_Pipeline_Settings_Retention_Policy_PR_Runs",
+  "description": "Retention policy - Days to keep pull request runs (>= 10). Runs represent one execution of a pipeline. During a run, the pipeline is processed, and agents process one or more jobs. A pipeline run includes jobs, steps, and tasks. Runs power both continuous integration (CI) and continuous delivery (CD) pipelines. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/retention",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Set the number of days to keep pull request runs.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2250",
+  "policyRule": {
+    "target": "ADOProjectPipelineRetentionSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineRetentionSettings",
+          "property": "PurgePullRequestRuns.Value",
+          "operator": "greaterThan",
+          "value": 9
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

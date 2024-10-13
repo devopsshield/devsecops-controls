@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects - Service Connections",
+  "description": "Secure your projects' services connections by configuring the permissions and securing your connections.",
+  "policyInitiativeCode": "ADO_Project_ServiceConnections_BestPractices"
+}

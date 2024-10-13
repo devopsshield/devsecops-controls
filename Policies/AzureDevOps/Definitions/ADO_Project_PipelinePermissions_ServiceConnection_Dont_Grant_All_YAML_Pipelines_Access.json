@@ -1,0 +1,32 @@
+﻿{
+  "name": "Do not make the Service Connection accessible to all YAML Pipelines",
+  "code": "ADO_Project_PipelinePermissions_ServiceConnection_Dont_Grant_All_YAML_Pipelines_Access",
+  "description": "Service connections must not be granted access to all YAML pipelines. Lock down the service connection and only allow selected YAML pipelines to consume the service connection. If any other YAML pipeline refers to the service connection, an authorization request gets raised, which must be approved by a connection Administrator. Learn more: https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#pipeline-permissions https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on the three dots button. \n5. Click Security. \n6. Under 'Pipeline permissions' section, click 'Restrict Permission' to avoid granting access to all YAML pipelines. Add the YAML pipelines that need explicit access on this service connection.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2310",
+  "policyRule": {
+    "target": "ADOProjectPipelinePermissions",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "endpoint"
+        },
+        {
+          "resource": "ADOProjectPipelinePermissions",
+          "property": "AllPipelines.Authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

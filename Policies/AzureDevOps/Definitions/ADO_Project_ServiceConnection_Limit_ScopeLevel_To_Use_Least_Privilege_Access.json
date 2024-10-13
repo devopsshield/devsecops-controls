@@ -1,0 +1,44 @@
+﻿{
+  "name": "Azure service connection should not be granted access to subscription or management group",
+  "code": "ADO_Project_ServiceConnection_Limit_ScopeLevel_To_Use_Least_Privilege_Access",
+  "description": "Azure Resource Manager service connection should restrict scope level access only to specific resource or resource group as needed. It is important to not provide subscription or management group access for the 'automatic' service principal. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/security-best-practices#scope-service-connections https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection of type 'Azure Resource Manager'. \n4. Click on Edit. \n5. Reduce the scope to the appropiate resource group. \n6. Save the changes.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2460",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpoint",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "Type",
+          "operator": "equals",
+          "value": "azurerm"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "DataAzureCloud.Environment",
+          "operator": "equals",
+          "value": "AzureCloud"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "DataAzureCloud.CreationMode",
+          "operator": "equals",
+          "value": "automatic"
+        },
+        {
+          "resource": "ADOProjectServiceEndpoint",
+          "property": "HasLeastPrivilegeAccess",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

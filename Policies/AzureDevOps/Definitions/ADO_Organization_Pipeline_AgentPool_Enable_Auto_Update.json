@@ -1,0 +1,26 @@
+﻿{
+  "name": "Enable auto-update of agents in the agent pool",
+  "code": "ADO_Organization_Pipeline_AgentPool_Enable_Auto_Update",
+  "description": "Agent update settings - Allow agents in the agent pool to automatically update. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Agent pools. \n3. Select an agent pool. \n4. Select the Settings tab. \n5. Turn 'On' the setting 'Allow agents in this pool to automatically update'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1060",
+  "policyRule": {
+    "target": "ADOTaskAgentPool",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOTaskAgentPool",
+          "property": "AutoUpdate",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

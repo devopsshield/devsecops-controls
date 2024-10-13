@@ -1,0 +1,26 @@
+﻿{
+  "name": "Inactive service connection should be reviewed and must be removed if not used",
+  "code": "ADO_Project_ServiceConnection_Review_Inactive_ServiceConnections",
+  "description": "Review inactive service connections and remove them if not required anymore. Inactive services connections must be removed to reduce the attack surface for a malicious user.  Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on the Usage history tab and review last run date. \n5. Click on the three dots button (top right). \n6. Click on Delete.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2470",
+  "policyRule": {
+    "target": "ADOProjectServiceEndpointExecutionRecord",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectServiceEndpointExecutionRecord",
+          "property": "Data.StartTime",
+          "operator": "lessThanPeriodDays",
+          "value": 180
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

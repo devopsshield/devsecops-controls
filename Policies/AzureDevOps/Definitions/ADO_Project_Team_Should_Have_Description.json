@@ -1,0 +1,26 @@
+﻿{
+  "name": "Project Team should have a description",
+  "code": "ADO_Project_Team_Should_Have_Description",
+  "description": "Include a description to your project team for clarity and purpose. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/settings/add-teams",
+  "recommendation": "1. Navigate to Project Settings. \n2. Select General -> Teams. \n3. Select a team. \n4. Click on Settings tab. \n5. Under 'Team Details' section, enter a Description. \n6. Click on 'Save'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2336",
+  "policyRule": {
+    "target": "ADOWebApiTeam",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOWebApiTeam",
+          "property": "Description",
+          "operator": "notEquals",
+          "value": ""
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

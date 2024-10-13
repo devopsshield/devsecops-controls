@@ -1,0 +1,33 @@
+﻿{
+  "name": "Disallow OAuth Authentication",
+  "code": "ADO_Organization_Policies_AppConnection_Disable_OAuth_App_Access",
+  "description": "Third-party application access via OAuth should be disabled. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-application-access-policies",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. Application connection policies. \n4. Turn 'Off' the setting 'Third-party application access via OAuth'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1160",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.DisallowOAuthAuthentication"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+

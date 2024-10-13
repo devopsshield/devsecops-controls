@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pull Requests - Enable auto-merge for a pull request",
+  "code": "GH_Repository_Policies_PullRequests_Enable_Allow_Auto_Merge",
+  "description": "You can increase development velocity by enabling auto-merge for a pull request so that the pull request will merge automatically when all merge requirements are met. You should allow setting pull requests to merge automatically once all required reviews and status checks have passed. Waits for merge requirements to be met and then merges automatically. Learn more: https://docs.github.com/en/enterprise-cloud@latest/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-auto-merge-for-pull-requests-in-your-repository",
+  "recommendation": "1. Go to Repository Settings. \n2. In the 'General' section of the sidebar, go to 'Pull Requests' section. \n3. Ensure the 'Allow auto-merge' setting is enabled.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "medium",
+  "ruleId": "DOS5060",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHRepository",
+          "property": "AllowAutoMerge",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

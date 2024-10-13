@@ -1,0 +1,15 @@
+﻿{
+  "name": "ADO Secure Projects - Pipeline Permissions",
+  "code": "ADO_Project_PipelinePermissions_BestPractices",
+  "description": "Secure your projects' pipelines by configuring the pipeline permissions.",
+  "type": "builtIn",
+  "category": "project",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "ADO_Project_PipelinePermissions_AgentPool_Dont_Grant_All_YAML_Pipelines_Access",
+    "ADO_Project_PipelinePermissions_Environment_Dont_Grant_All_YAML_Pipelines_Access",
+    "ADO_Project_PipelinePermissions_SecureFile_Dont_Grant_All_YAML_Pipelines_Access",
+    "ADO_Project_PipelinePermissions_ServiceConnection_Dont_Grant_All_YAML_Pipelines_Access",
+    "ADO_Project_PipelinePermissions_VariableGroup_With_Secrets_Dont_Grant_All_YAML_Pipelines_Access"
+  ]
+}

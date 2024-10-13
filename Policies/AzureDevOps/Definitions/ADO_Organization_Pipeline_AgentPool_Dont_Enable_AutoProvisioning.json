@@ -1,0 +1,32 @@
+﻿{
+  "name": "Disable auto-provisioning of agent pools",
+  "code": "ADO_Organization_Pipeline_AgentPool_Dont_Enable_AutoProvisioning",
+  "description": "Do not enable auto-provisioning of the agent pool in new projects. Enabling the auto-provisioning will import automatically the agent pool for all new projects. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Pipelines -> Agent pools. \n3. Select an agent pool. \n4. Select the Settings tab. \n5. Turn 'Off' the setting 'Auto-provision this agent pool in new projects'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1050",
+  "policyRule": {
+    "target": "ADOTaskAgentPool",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOTaskAgentPool",
+          "property": "Name",
+          "operator": "notEquals",
+          "value": "Azure Pipelines"
+        },
+        {
+          "resource": "ADOTaskAgentPool",
+          "property": "AutoProvision",
+          "operator": "equals",
+          "value": false
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

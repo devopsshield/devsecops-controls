@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects - Pipeline Checks",
+  "description": "Secure your projects' pipelines by configuring checks on your protected resources.",
+  "policyInitiativeCode": "ADO_Project_Pipeline_Checks_BestPractices"
+}

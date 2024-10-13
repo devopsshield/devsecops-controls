@@ -1,0 +1,5 @@
+﻿{
+  "name": "ADO Assignment for Securing Projects - General",
+  "description": "Secure your projects by ensuring private visibility and validating the settings.",
+  "policyInitiativeCode": "ADO_Project_BestPractices"
+}

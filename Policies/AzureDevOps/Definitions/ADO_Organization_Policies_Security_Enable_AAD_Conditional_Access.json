@@ -1,0 +1,33 @@
+﻿{
+  "name": "Enforce AAD Conditional Access",
+  "code": "ADO_Organization_Policies_Security_Enable_AAD_Conditional_Access",
+  "description": "Enable Azure Active Directory Conditional Access Policy Validation. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-application-access-policies",
+  "recommendation": "1. Go to Organization Settings. \n2. Click on Security -> Policies. \n3. Security policies. \n4. Turn 'On' the setting 'Enable Azure Active Directory Conditional Access Policy Validation'.",
+  "type": "builtIn",
+  "category": "organization",
+  "severity": "high",
+  "ruleId": "DOS1190",
+  "policyRule": {
+    "target": "ADOOrganizationPolicy",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Name",
+          "operator": "equals",
+          "value": "Policy.EnforceAADConditionalAccess"
+        },
+        {
+          "resource": "ADOOrganizationPolicy",
+          "property": "Policy.Value",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}
+

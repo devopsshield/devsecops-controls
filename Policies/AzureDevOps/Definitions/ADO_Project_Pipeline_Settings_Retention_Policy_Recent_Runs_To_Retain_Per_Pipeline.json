@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Retention Policy - Number of recent runs to retain per pipeline (>= 3)",
+  "code": "ADO_Project_Pipeline_Settings_Retention_Policy_Recent_Runs_To_Retain_Per_Pipeline",
+  "description": "Retention policy - Number of recent runs to retain per pipeline (>= 3). This many runs will also be retained per protected branch and default pipeline branch. (Azure Repos only). Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/retention",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Set the number of recent runs to keep for each pipeline.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "low",
+  "ruleId": "DOS2260",
+  "policyRule": {
+    "target": "ADOProjectPipelineRetentionSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineRetentionSettings",
+          "property": "RetainRunsPerProtectedBranch.Value",
+          "operator": "greaterThan",
+          "value": 2
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

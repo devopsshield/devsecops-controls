@@ -1,0 +1,26 @@
+﻿{
+  "name": "Repository visibility should be private",
+  "code": "GH_Repository_Visibility_Private",
+  "description": "Repository visibility should always be private or internal. Secure your code by converting public repositories to private whenever appropriate. Learn more: https://docs.github.com/en/enterprise-cloud@latest/code-security/getting-started/best-practices-for-preventing-data-leaks-in-your-organization#prevent-data-leaks https://docs.github.com/en/enterprise-cloud@latest/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility",
+  "recommendation": "1. Go to Repository Settings. \n2. In the 'General' section of the sidebar, go to 'Danger Zone' section. \n3. Under the 'Change repository visibility' section. \n4. Ensure the message 'This repository is currently private/internal.' is displayed.",
+  "type": "builtIn",
+  "category": "repository",
+  "severity": "critical",
+  "ruleId": "DOS5050",
+  "policyRule": {
+    "target": "GHRepository",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHRepository",
+          "property": "Private",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+﻿{
+  "name": "A project must have at least 2 and no more than 5 administrators",
+  "code": "ADO_Project_Limit_Min_Max_Admins",
+  "description": "Your project should have at least 2 and at most 5 Project Administrators. To reduce the risk of losing admin access, you may want to ensure at least 2 users are part of the Project Administrators group. Limit the number of administrators to no more than 5 for your project. Learn more: https://learn.microsoft.com/en-us/azure/devops/organizations/security/look-up-project-administrators",
+  "recommendation": "1. Go to Project Settings. \n2. Click on General -> Permissions. \n3. Groups - Select ' Project Administrators'. \n4. Review all members of this group.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "medium",
+  "ruleId": "DOS2130",
+  "policyRule": {
+    "target": "ADOSecurityGroupMembers",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOSecurityGroupMembers",
+          "property": "ScopeResource.ResourceType",
+          "operator": "equals",
+          "value": "project"
+        },
+        {
+          "resource": "ADOSecurityGroupMembers",
+          "property": "ScopeResource.Group.DisplayName",
+          "operator": "equals",
+          "value": "Project Administrators"
+        },
+        {
+          "resource": "ADOSecurityGroupMembers",
+          "property": "TotalUserIdentityCount",
+          "operator": "GreaterThan",
+          "value": 1
+        },
+        {
+          "resource": "ADOSecurityGroupMembers",
+          "property": "TotalUserIdentityCount",
+          "operator": "LessThan",
+          "value": 4
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

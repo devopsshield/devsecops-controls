@@ -1,0 +1,26 @@
+﻿{
+  "name": "DevSecOps Control - Ensure Container Image Scanning (CIS) / Container Scanning",
+  "code": "GH_Repository_DevSecOps_Control_CIS_Container_Image_Scanning",
+  "description": "Make sure that Container Image Scanning (CIS) / Image Scanning is in place for your repository. Container image scanning is a crucial aspect of DevSecOps, especially as containers become more prevalent in application deployment. Container scanning is the process and scanning tools used to identify vulnerabilities within containers and their components. It is key to container security, and enables developers and cybersecurity teams to fix security threats in containerized applications before deployment. Container scanning tools, scan containers and compare them against public or proprietary vulnerability databases to uncover potential security issues. Learn more: https://owasp.org/www-project-devsecops-guideline/latest/02f-Container-Vulnerability-Scanning https://www.practical-devsecops.com/top-container-security-tools/ https://www.aquasec.com/cloud-native-academy/container-security/image-scanning/ https://snyk.io/learn/container-security/container-scanning",
+  "recommendation": "1. Navigate to Repository -> Actions. \n2. Open your repository CI Pipeline. \n3. Ensure a Container Image Scanning (CIS) tool is present in your pipeline.",
+  "type": "builtIn",
+  "category": "appsec",
+  "severity": "critical",
+  "ruleId": "DOS6740",
+  "policyRule": {
+    "target": "GHActionsWorkflows",
+    "if": {
+      "allOf": [
+        {
+          "resource": "GHActionsWorkflows",
+          "property": "WorkflowsYaml",
+          "operator": "match",
+          "value": "$(GH_POLICY_VAR_DEVSECOPS_CIS_CONTAINER_IMAGE_SCANNING_TOOLS_PATTERNS)"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

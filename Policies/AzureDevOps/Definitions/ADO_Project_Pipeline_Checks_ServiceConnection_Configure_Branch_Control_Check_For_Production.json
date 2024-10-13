@@ -1,0 +1,50 @@
+﻿{
+  "name": "Pipeline Protected Resources - Checks - Configure a protected branch check on each production service connection",
+  "code": "ADO_Project_Pipeline_Checks_ServiceConnection_Configure_Branch_Control_Check_For_Production",
+  "description": "Allow deployments based on branches linked to the run. Extend pipeline protection by configuring a protected branch check on each of your resources. This will automatically stop your pipeline from running on top of any user branches. Most pipelines need a second set of eyes look over changes (especially to the pipeline itself) before deploying to production. Checks allow you to pause the pipeline run until certain conditions are met. Learn more: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources#checks https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Service connections link under Pipelines. \n3. Select a service connection. \n4. Click on 'Approvals and checks' tab. \n5. Add a new 'Branch control' check.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "high",
+  "ruleId": "DOS2152",
+  "policyRule": {
+    "target": "ADOProjectCheckConfiguration",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Type",
+          "operator": "equals",
+          "value": "endpoint"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Resource.Name",
+          "operator": "match",
+          "value": "$(POLICY_VAR_PROJECT_PROD_SERVICE_CONNECTION_PATTERNS)"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "Type.Name",
+          "operator": "equals",
+          "value": "Task Check"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "BranchControl.DefinitionRef.Name",
+          "operator": "equals",
+          "value": "evaluatebranchProtection"
+        },
+        {
+          "resource": "ADOProjectCheckConfiguration",
+          "property": "BranchControl.Inputs.AllowedBranches",
+          "operator": "notEquals",
+          "value": "*"
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

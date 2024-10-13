@@ -1,0 +1,26 @@
+﻿{
+  "name": "Pipeline Settings - Disable creation of classic build pipelines",
+  "code": "ADO_Project_Pipeline_Settings_Disable_Creation_Of_Classic_Build_Pipelines",
+  "description": "Enable the setting 'Disable creation of classic build pipelines'. When this is enabled, no classic build pipelines can be created / imported. Existing ones will continue to work. Learn more: https://devblogs.microsoft.com/devops/disable-creation-of-classic-pipelines",
+  "recommendation": "1. Navigate to Project Settings. \n2. Open the Settings link under Pipelines. \n3. Turn 'On' the setting 'Disable creation of classic build pipelines'.",
+  "type": "builtIn",
+  "category": "project",
+  "severity": "medium",
+  "ruleId": "DOS2170",
+  "policyRule": {
+    "target": "ADOProjectPipelineGeneralSettings",
+    "if": {
+      "allOf": [
+        {
+          "resource": "ADOProjectPipelineGeneralSettings",
+          "property": "DisableClassicBuildPipelineCreation",
+          "operator": "equals",
+          "value": true
+        }
+      ]
+    },
+    "then": {
+      "effect": "Audit"
+    }
+  }
+}

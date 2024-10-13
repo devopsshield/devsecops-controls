@@ -1,0 +1,16 @@
+﻿{
+  "name": "GitHub Secure Actions - General",
+  "code": "GH_Actions_BestPractices",
+  "description": "Secure your GitHub Actions by applying standards and best practices.",
+  "type": "builtIn",
+  "category": "organization",
+  "version": "1.0.0",
+  "policyDefinitionCodes": [
+    "GH_Organization_Actions_Policies_Restrict_Default_Workflow_Permissions_To_Read",
+    "GH_Organization_Actions_Policies_Restrict_Managing_Pull_Requests",
+    "GH_Organization_Actions_Policies_Limit_Specific_Actions_And_Reusable_Workflows_To_Run",
+    "GH_Organization_Actions_Secrets_Limit_Organization_Secrets_Usage",
+    "GH_Organization_Actions_Secrets_Restrict_Visibility_To_Selected_Repos",
+    "GH_Organization_Actions_Secrets_Restrict_Access_To_Fewer_Selected_Repos"
+  ]
+}
